@@ -28,14 +28,21 @@ public class XmlModel {
 	private boolean addAndroidHead =true;
 	private String json;
 	private String xmlAbsoultPath;
+	private String xmlPath;
 
-	public XmlModel(String xmlJsonName,String xmlPath) {
+	public XmlModel(String xmlJsonName,String xmlAbsoultPath, String xmlPath) {
 		super();
 		if (TextUtils.isEmpty(xmlJsonName)) {
 			return;
 		}
-		xmlAbsoultPath=xmlPath;
+		this.xmlPath=xmlPath;
+		this.xmlAbsoultPath=xmlAbsoultPath;
 		json = FileService.readStringFromFile(Viewstant.PROJECT_FILE_PATH, xmlJsonName);
+	}
+	public XmlModel(JSONObject json,String xmlPath) {
+		super();
+		xmlAbsoultPath=xmlPath;
+		this.json =json.toString();
 	}
 
 	public void initXml() {
@@ -100,7 +107,9 @@ public class XmlModel {
 				 viewTypeSource = FileService.readStringFromFile(Viewstant.PROJECT_FILE_PATH, factViewType+".xml");
 			}
 			if (viewId.contains(NewActivityByXml.FAKE_TAG)) {
-				viewTypeSource=viewTypeSource.replace("        android:id="+Viewstant.SHUANG_YIN_HAO+"@+id/"+factViewType+"Id"+Viewstant.SHUANG_YIN_HAO+Viewstant.LINE_SEPARATOR, "");
+				String idLine = "        android:id="+Viewstant.SHUANG_YIN_HAO+"@+id/"+factViewType+"Id"+Viewstant.SHUANG_YIN_HAO+Viewstant.LINE_SEPARATOR;
+				System.err.println("viewId:"+viewId+"  ----    "+"idLine："+idLine);//TODO将包含_fake的key替换成空格
+				viewTypeSource=viewTypeSource.replace(idLine, "");
 			}else {
 				viewTypeSource =viewTypeSource.replace(factViewType+"Id", viewId);
 			}
@@ -112,33 +121,67 @@ public class XmlModel {
 				
 			}
 			
-			Object optJson = jsonObject.opt(key);
 			
-			boolean isFatherLayout = optJson instanceof JSONObject;
 			
-			String target = "</" + factViewType + ">";
-			boolean contains = viewTypeSource.contains(target);
-			if (isFatherLayout) {
-				if (contains) {
-					viewTypeSource =  viewTypeSource.replace(target, "");
+			if (Viewstant.LIST_VIEW.equals(factViewType)||Viewstant.GRID_VIEW.equals(factViewType)) {//如果实际view是listview，则将直接添加控件xml文件，将对应的JSONObject处理成 ListView item的xml元素
+				stringBuffer.append(viewTypeSource).append(Viewstant.LINE_SEPARATOR);
+				
+				Object optJson = jsonObject.opt(key);
+				if (null!=optJson&&optJson instanceof JSONObject) {
+					String listItemXmlName =tangxiaocheng.log.StringUtil.getXmlName(viewId)+"_item";
+					
+					System.out.println("listview id = "+viewId);
+					System.out.println(listItemXmlName);
+					System.out.println();
+					System.out.println();
+					System.out.println();
+					System.out.println();
+					JSONObject new_name = (JSONObject) optJson;
+				String itemXmlPath =	xmlPath+""+listItemXmlName+".xml";
+				System.err.println(itemXmlPath);
+					XmlModel item = new XmlModel(new_name, itemXmlPath);
+					item.initXml();
+//					optJsonListItem(new_name);
 				}
+				
+			}else {
+				Object optJson = jsonObject.opt(key);
+				
+				boolean isFatherLayout = optJson instanceof JSONObject;
+				
+				String target = "</" + factViewType + ">";
+				boolean contains = viewTypeSource.contains(target);
+				if (isFatherLayout) {
+					if (contains) {
+						viewTypeSource =  viewTypeSource.replace(target, "");
+					}
+				}
+				if (isFatherLayout) {
+					stringBuffer.append(viewTypeSource).append(Viewstant.LINE_SEPARATOR);
+					JSONObject new_name = (JSONObject) optJson;
+					optJson(new_name);
+					System.err.println("----    optJson instanceof JSONObject ---->"+"key:"+key+" ---> "+new_name.toString());
+				}else  {
+					System.err.println("---- !! optJson instanceof JSONObject ---->"+"key:"+key+" ---> "+optJson.toString());
+				}
+				
+				if (contains&&isFatherLayout) {
+					stringBuffer.append("    "+target).append(Viewstant.LINE_SEPARATOR);
+				}else {
+					stringBuffer.append(viewTypeSource).append(Viewstant.LINE_SEPARATOR);
+				}
+				
+				
 			}
-			if (isFatherLayout) {
-				 stringBuffer.append(viewTypeSource).append(Viewstant.LINE_SEPARATOR);
-				JSONObject new_name = (JSONObject) optJson;
-				optJson(new_name);
-				System.err.println("----    optJson instanceof JSONObject ---->"+"key:"+key+" ---> "+new_name.toString());
-			}else  {
-				System.err.println("---- !! optJson instanceof JSONObject ---->"+"key:"+key+" ---> "+optJson.toString());
-			}
-			 
-			 if (contains&&isFatherLayout) {
-				 stringBuffer.append("    "+target).append(Viewstant.LINE_SEPARATOR);
-			 }else {
-				 stringBuffer.append(viewTypeSource).append(Viewstant.LINE_SEPARATOR);
-			}
+			
+			
 			
 		}
+	}
+
+	private void optJsonListItem(JSONObject new_name) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public String getXmlTag() {

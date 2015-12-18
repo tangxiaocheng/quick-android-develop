@@ -22,6 +22,10 @@ public class Viewstant {
 	public static final String TEXT_VIEW = "TextView";
 	public static final String LIST_VIEW = "ListView";
 	public static final String EXPANDABLE_LIST_VIEW = "ExpandableListView";
+	
+	
+	
+	public static final String ACTIVITY = "Activity";
 
 	static class Import {
 

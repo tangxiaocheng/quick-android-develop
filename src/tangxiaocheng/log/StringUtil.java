@@ -2,6 +2,8 @@ package tangxiaocheng.log;
 
 public class StringUtil {
 
+	
+	
 	public static String getFristToUpperCase(String word) {
 		StringBuffer buffer =new StringBuffer();
 		char[] charArray = word.toCharArray();

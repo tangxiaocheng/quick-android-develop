@@ -13,7 +13,6 @@ import java.util.List;
 
 import tangxiaocheng.log.StringUtil;
 
-
 import com.tangdengcheng.www.util.TextUtils;
 
 public class NewActivityByXml {
@@ -40,11 +39,13 @@ public class NewActivityByXml {
 	private List< String> viewList;
 	private String mainfestPath;
 	private String baseActivityName;
+	private String projectPath;
 	private XmlModel xmlModel;
 	public NewActivityByXml(String projectPath,
 			boolean isMakeOnClickListener, boolean isMakeSetText,
 			String classPackageName,String xmlName_, String appPackageName, boolean eclipseProject, String xmlJson) {
 		super();
+		this.projectPath = projectPath;
 		if (TextUtils.isEmpty(xmlName_)) {
 			System.err.println("XML_NAME==null return");
 			return;
@@ -74,14 +75,14 @@ public class NewActivityByXml {
 		String xmlAbsoultPath = xmlPath + xmlName+".xml";
 		
 		if (!TextUtils.isEmpty(xmlJson)) {
-			this.xmlModel = new XmlModel(xmlJson, xmlAbsoultPath);
+			this.xmlModel = new XmlModel(xmlJson, xmlAbsoultPath, xmlPath);
 			xmlModel.initXml();
 		}else {
 			
 			StringBuffer  buffer =new StringBuffer();
 			
 			if (!new File(xmlAbsoultPath).exists()) {
-				String fileAbsolutePath =Viewstant.PROJECT_FILE_PATH+ "/LinearLayout.xml";
+				String fileAbsolutePath =Viewstant.PROJECT_FILE_PATH+ "/LinearLayoutTop.xml";
 				String readStringFromFile = FileService.readStringFromFileAddXmlHead(fileAbsolutePath,
 						Viewstant.ANDROID_XML_HEAD);
 				buffer.append(readStringFromFile);
@@ -100,6 +101,9 @@ public class NewActivityByXml {
 	 * 根据ID在Activity onCreate 方法中生成findViewById的方法以及对应的成员变量
 	 */
 	public  void makeOnCreateCode() {
+		
+		 activitySystemOut =new Save2File(className,classPath + classPackageName.replace(".", "/") + "/", "java");
+		
 		if (!initMapSuccessFull) {
 			System.out.println("initMapSuccessFull fail , please check");
 			return;
@@ -128,6 +132,12 @@ public class NewActivityByXml {
 		}
 		
 		
+		if (TextUtils.isEmpty(baseActivityName)||baseActivityName.equals(Viewstant.ACTIVITY)) {//TODO 添加默认的 base activity （完整路径）
+			baseActivityName = "Activity";
+			activitySystemOut.println("import android.app.Activity;");
+		}else {
+			//TODO 导入baseActivity的包。需要设置
+		}
 		
 		for (String string : viewList) {
 			if (Viewstant.ANDROID_VIEW_MAP.containsKey(string)) {
@@ -179,11 +189,43 @@ public class NewActivityByXml {
 			activitySystemOut.println("import "+adapterPackgeName+"."+adapterClassName+";");
 			activitySystemOut.println("import "+modelPackgeName+"."+modelClassName+";");
 			
+			//判断xml文件是否存在，如已经存在，则不在生产 listview item xml 文件
 			
-			Save2File adapterSystemOut =new Save2File(adapterClassName,classPath+adapterPackgeName.replace(".", "/")+"/" , "java");
+			String pathname = xmlPath+itemXmlName+".xml";
+			
+			File item_xml = new File(pathname);
+			if (null!=item_xml&&item_xml.exists()) {
+				System.out.println("listview item : -------------------------------------> "+item_xml.getAbsolutePath());
+			}else {
+				Save2File xmlSystemOut =new Save2File(itemXmlName,xmlPath, "xml");
+				xmlSystemOut.println("<RelativeLayout xmlns:android="+Viewstant.SHUANG_YIN_HAO+"http://schemas.android.com/apk/res/android"+Viewstant.SHUANG_YIN_HAO);
+				xmlSystemOut.println("    xmlns:tools="+Viewstant.SHUANG_YIN_HAO+"http://schemas.android.com/tools"+Viewstant.SHUANG_YIN_HAO);
+				xmlSystemOut.println("    android:layout_width="+Viewstant.SHUANG_YIN_HAO+"match_parent"+Viewstant.SHUANG_YIN_HAO);
+				xmlSystemOut.println("    android:layout_height="+Viewstant.SHUANG_YIN_HAO+"wrap_content"+Viewstant.SHUANG_YIN_HAO+" >");
+				xmlSystemOut.println("</RelativeLayout>");
+				xmlSystemOut.saveStringToFile();
+			}
+			
+			
+			
+			
+			NewActivityByXml adapterByXml =new NewActivityByXml(projectPath, needSetOnClickListener, needSetOnClickListener, modelClassName, itemXmlName, adapterPackgeName, true, null);
+		
+			String listItemFindViewCode  = adapterByXml.makeGetViewCode(xmlPath,itemXmlName,".xml");
+			
+			
+			
 			Save2File modelSystemOut =new Save2File(modelClassName,classPath+modelPackgeName.replace(".", "/")+"/" , "java");
+			modelSystemOut.println("package "+modelPackgeName+";");
+			modelSystemOut.println();
+			modelSystemOut.println("public class "+modelClassName+"{");
+			modelSystemOut.println("}");
+			modelSystemOut.saveStringToFile();
 			
-			Save2File xmlSystemOut =new Save2File(itemXmlName,xmlPath, "xml");
+			
+			
+			//adapterSystemOut 需要更具xml文件生产adapter
+			Save2File adapterSystemOut =new Save2File(adapterClassName,classPath+adapterPackgeName.replace(".", "/")+"/" , "java");
 			
 			adapterSystemOut.println("package "+adapterPackgeName+";");
 			adapterSystemOut.println();
@@ -232,17 +274,21 @@ public class NewActivityByXml {
 			adapterSystemOut.println(NULL_STRING_2+"}");
 			adapterSystemOut.println();
 			
-			adapterSystemOut.println(NULL_STRING_2+"@Override");
-			adapterSystemOut.println(NULL_STRING_2+"public View getView(int position, View convertView, ViewGroup parentViewGroup) {");
-			adapterSystemOut.println(NULL_STRING_2+NULL_STRING_1+"if (convertView == null) { ");
 			
-			adapterSystemOut.println(NULL_STRING_2+NULL_STRING_1+"convertView = LayoutInflater.from(context) .inflate(R.layout."+itemXmlName+", parentViewGroup,false);");
-			adapterSystemOut.println(NULL_STRING_2+NULL_STRING_1+"} else {");
-			adapterSystemOut.println(NULL_STRING_2+NULL_STRING_1+"}");
-			adapterSystemOut.println(NULL_STRING_2+NULL_STRING_1+modelClassName+" model = adapterList.get(position);");
-			adapterSystemOut.println(NULL_STRING_2+NULL_STRING_1+"return convertView;");
+			adapterSystemOut.println(listItemFindViewCode);
 			
-			adapterSystemOut.println(NULL_STRING_2+"}");
+			
+//			adapterSystemOut.println(NULL_STRING_2+"@Override");
+//			adapterSystemOut.println(NULL_STRING_2+"public View getView(int position, View convertView, ViewGroup parentViewGroup) {");
+//			adapterSystemOut.println(NULL_STRING_2+NULL_STRING_1+"if (convertView == null) { ");
+//			adapterSystemOut.println(NULL_STRING_2+NULL_STRING_1+"convertView = LayoutInflater.from(context) .inflate(R.layout."+itemXmlName+", parentViewGroup,false);");
+//			adapterSystemOut.println(NULL_STRING_2+NULL_STRING_1+"} else {");
+//			adapterSystemOut.println(NULL_STRING_2+NULL_STRING_1+"}");
+//			adapterSystemOut.println(NULL_STRING_2+NULL_STRING_1+modelClassName+" model = adapterList.get(position);");
+//			adapterSystemOut.println(NULL_STRING_2+NULL_STRING_1+"return convertView;");
+//			adapterSystemOut.println(NULL_STRING_2+"}");
+			
+			
 			adapterSystemOut.println();
 			adapterSystemOut.println(NULL_STRING_2+"@Override");
 			adapterSystemOut.println(NULL_STRING_2+"public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {");
@@ -250,28 +296,14 @@ public class NewActivityByXml {
 			adapterSystemOut.println(NULL_STRING_2+"}");
 			
 			adapterSystemOut.println("}");
-			
-			modelSystemOut.println("package "+modelPackgeName+";");
-			modelSystemOut.println();
-			modelSystemOut.println("public class "+modelClassName+"{");
-			modelSystemOut.println("}");
-			
-			
-			xmlSystemOut.println("<RelativeLayout xmlns:android="+Viewstant.SHUANG_YIN_HAO+"http://schemas.android.com/apk/res/android"+Viewstant.SHUANG_YIN_HAO);
-			xmlSystemOut.println("    xmlns:tools="+Viewstant.SHUANG_YIN_HAO+"http://schemas.android.com/tools"+Viewstant.SHUANG_YIN_HAO);
-			xmlSystemOut.println("    android:layout_width="+Viewstant.SHUANG_YIN_HAO+"match_parent"+Viewstant.SHUANG_YIN_HAO);
-			xmlSystemOut.println("    android:layout_height="+Viewstant.SHUANG_YIN_HAO+"wrap_content"+Viewstant.SHUANG_YIN_HAO+" >");
-			xmlSystemOut.println("</RelativeLayout>");
 			adapterSystemOut.saveStringToFile();
-			modelSystemOut.saveStringToFile();
-			xmlSystemOut.saveStringToFile();
+			
+			
 //			return;
 		}
 		
 		activitySystemOut.println();
-		if (TextUtils.isEmpty(baseActivityName)) {
-			baseActivityName = "BaseActivity";
-		}
+		
 		String firstClassLineString = "public  class "+className+" extends  " + baseActivityName + (needSetOnClickListener?" implements OnClickListener":"") + " {";
 		activitySystemOut.println(firstClassLineString);
 		
@@ -412,9 +444,12 @@ public class NewActivityByXml {
 	/**
 	 * 在BaseAdapter类中，根据指定的xml布局文件生成对应的findViewById方法以及对应的ViewHolder
 	 */
-	public  void makeGetViewCode() {
+	public  String makeGetViewCode(String name, String classPath, String fileSuffix) {
 		
-
+		StringBuffer importStringBuffer =new StringBuffer();
+		
+		Save2File activitySystemOut = new Save2File(name, classPath, fileSuffix);
+		
 		activitySystemOut.println("    " + "private final static class "
 				+ VIEW_HOLDER_CLASS_NAME + " { ");
 		for (Iterator<String> iterator = idViewMap.keySet().iterator(); iterator
@@ -449,12 +484,27 @@ public class NewActivityByXml {
 				+ xmlString + ", parentViewGroup,false);");
 		activitySystemOut.println(NULL_STRING_2 + classObject + " = new "
 				+ VIEW_HOLDER_CLASS_NAME + " ();");
-
+		
+		
+//		
+//		for (String string : viewList) {
+//			if (Viewstant.ANDROID_VIEW_MAP.containsKey(string)) {
+//			activitySystemOut.println(Viewstant.ANDROID_VIEW_MAP.get(string));
+//			}else {
+//				System.err.println("//请添加"+string);
+//			}
+//		
+//		
+		
 		for (Iterator<String> iterator = idViewMap.keySet().iterator(); iterator
 				.hasNext();) {
 			String id = (String) iterator.next();
+			String viewType = idViewMap.get(id);
+			
+//			importStringBuffer.append(com.tangdengcheng.opt.xml.to.code.Viewstant.ANDROID_VIEW_MAP.get(viewType)).append("/n");
+			
 			activitySystemOut.println(NULL_STRING_2 + classObject + "." + id + " = ("
-					+ idViewMap.get(id) + ")" + CONVERT_VIEW + "."
+					+ viewType + ")" + CONVERT_VIEW + "."
 					+ "findViewById(R.id." + id + ");");
 		}
 		if (isMakeOnClickListener) {
@@ -488,6 +538,9 @@ public class NewActivityByXml {
 		}
 		activitySystemOut.println(NULL_STRING_2 + "return convertView;");
 		activitySystemOut.println(NULL_STRING_1 + "}");
+//		activitySystemOut.saveStringToFile();
+	return	activitySystemOut.getString();
+		
 	}
 
 	private void addManifestTag(){

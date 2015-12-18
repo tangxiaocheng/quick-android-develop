@@ -8,7 +8,7 @@ public class BuildCode {
 
 		System.err.println(Viewstant.PROJECT_FILE_PATH);
 
-		String xmlJson = "";
+		String xmlJson = "view_tree.json";
 
 		String projectPath_ = "/Users/tangdengcheng/Documents/github_workplace/GanLuYuan";
 		String classPackageName_ = "com.ganluyuan";

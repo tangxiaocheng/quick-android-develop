@@ -1,0 +1,11 @@
+    <ExpandableListView
+        android:id="@+id/ExpandableListViewId"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:cacheColorHint="@color/transparent"
+        android:childDivider="@color/transparent"
+        android:divider="@color/transparent"
+        android:dividerHeight="1px"
+        android:groupIndicator="@null"
+        android:listSelector="@color/transparent" />

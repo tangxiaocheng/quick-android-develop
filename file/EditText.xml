@@ -1,0 +1,7 @@
+    <EditText
+        android:id="@+id/EditTextId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="EditText_STRING"
+        android:inputType="none"
+        android:text="" />

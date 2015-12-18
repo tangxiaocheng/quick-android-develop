@@ -1,0 +1,8 @@
+    <ToggleButton
+        android:id="@+id/ToggleButtonId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textOff=""
+        android:textOn="" />

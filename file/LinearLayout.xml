@@ -1,0 +1,6 @@
+    <LinearLayout
+        android:id="@+id/LinearLayoutId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="ORIENTATION" >
+    </LinearLayout>

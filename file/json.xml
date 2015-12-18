@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+    name="myproject"
+    default="generate" >
+
+    <taskdef
+        name="jsonschema2pojo"
+        classname="org.jsonschema2pojo.ant.Jsonschema2PojoTask" >
+
+        <classpath> <!-- classpath only required if jars have *NOT* been added to $ANT_HOME/lib -->
+
+            <fileset dir="/Users/tangdengcheng/Desktop/ant_java_jar" >
+
+                <include name="**/*.jar" />
+            </fileset>
+        </classpath>
+    </taskdef>
+
+    <target name="generate" >
+
+        <jsonschema2pojo
+            source="3001.json"
+            targetDirectory="build/generated-types"
+            targetPackage="com.example" />
+    </target>
+
+</project>

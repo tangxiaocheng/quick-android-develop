@@ -1,0 +1,12 @@
+    <ListView
+        android:id="@+id/ListViewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:cacheColorHint="@android:color/transparent"
+        android:childDivider="@android:color/transparent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="1dp"
+        android:listSelector="@android:color/transparent"
+        android:paddingTop="0dp"
+        android:scrollbars="none" />

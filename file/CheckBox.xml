@@ -1,0 +1,6 @@
+    <CheckBox
+        android:id="@+id/CheckBoxId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="CheckBox_STRING" />

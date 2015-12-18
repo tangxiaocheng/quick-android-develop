@@ -1,0 +1,78 @@
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/topRl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    
+
+    <LinearLayout
+        android:id="@+id/secondLl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+    
+
+   <View 
+       android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:background="#ffff00"
+       android:id="@+id/dividerV" />
+    </LinearLayout>
+   <TextView
+        android:id="@+id/fatherTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView_STRING"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_twenty" />
+    <LinearLayout
+        android:id="@+id/firstLl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+    
+    <RelativeLayout
+        android:id="@+id/bigRl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    
+   <TextView
+        android:id="@+id/nameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView_STRING"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_twenty" />
+    <Button
+        android:id="@+id/runB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button_STRING"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_twenty" />
+   <View 
+       android:layout_height="wrap_content"
+       android:layout_width="wrap_content"
+       android:background="#ffff00"
+       android:id="@+id/line1V" />
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/iconIv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/goB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button_STRING"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_twenty" />
+   <TextView
+        android:id="@+id/sexTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView_STRING"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_twenty" />
+    </LinearLayout>
+    </RelativeLayout>

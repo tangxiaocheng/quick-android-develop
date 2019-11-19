@@ -60,11 +60,12 @@ public class NewActivityByXml {
 		
 		className = StringUtil.getActivityName(xmlName_.replace("activity_", "")+"_activity");
 		
-		if (eclipseProject) {
-			mainfestPath = projectPath+"/"+"AndroidManifest.xml";
-			xmlPath = projectPath+"/res/layout/";
-			classPath = projectPath+"/src/";
-		}else {
+//		if (eclipseProject) {
+//			mainfestPath = projectPath+"/"+"AndroidManifest.xml";
+//			xmlPath = projectPath+"/res/layout/";
+//			classPath = projectPath+"/src/";
+//		}else
+			{
 			mainfestPath = projectPath+"/src/main/"+"AndroidManifest.xml";
 			xmlPath=projectPath+"/src/main/res/layout/";
 			classPath = projectPath+"/src/main/java/";

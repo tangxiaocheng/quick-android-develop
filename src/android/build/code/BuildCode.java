@@ -10,13 +10,13 @@ public class BuildCode {
 
 		String xmlJson = "view_tree.json";
 
-		String projectPath_ = "/Users/tangdengcheng/Documents/github_workplace/GanLuYuan";
-		String classPackageName_ = "com.ganluyuan";
-		String appPackage = "com.ganluyuan.android";
+		String projectPath_ = "/Users/randy/workspace/Smartreading/app";
+		String classPackageName_ = "tdc.com.smartreading.test";
+		String appPackage = "tdc.com.smartreading";
 
 		NewActivityByXml makeAndroidXml2Code = new NewActivityByXml(
 				projectPath_, true, true, classPackageName_, "activity_hello",
-				appPackage, true, xmlJson);
+				appPackage, false, xmlJson);
 		makeAndroidXml2Code.setBaseActivityName("Activity");
 		makeAndroidXml2Code.makeOnCreateCode();
 

@@ -57,15 +57,17 @@ public void make() {
 public	static void main(String[] args) throws Exception {
 	
 		String string3 = ".json";
-		String string2 = "3001";
-		String jsonPath = "/Users/tangdengcheng/Documents/github_workplace/JavaBase/JavaUtil/src/com/tangdengcheng/opt/xml/to/code/";
+		String string2 = "test_json_bean";
+		String jsonPath = "/Users/randy/quick-android-develop/file/";
 		String jsonFile = jsonPath + string2 + string3;
 		String tempSourceString = FileService.readStringFromFile(jsonFile);
 		String tempSourceString2 =FileService.readStringFromFile(jsonPath, string2 + string3);
 	
 		System.err.println(tempSourceString);
 		System.err.println(tempSourceString2);
-	
+
+//		JsonMakeBean jsonMakeBean = new JsonMakeBean ();
+//		jsonMakeBean.make ();
 	}
 
 	public void loopJson(String sourceString, String jsonKey) {

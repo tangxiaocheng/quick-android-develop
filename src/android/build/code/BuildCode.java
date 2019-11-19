@@ -16,7 +16,7 @@ public class BuildCode {
 
 		NewActivityByXml makeAndroidXml2Code = new NewActivityByXml(
 				projectPath_, true, true, classPackageName_, "activity_hello",
-				appPackage, false, xmlJson);
+				appPackage, xmlJson);
 		makeAndroidXml2Code.setBaseActivityName("Activity");
 		makeAndroidXml2Code.makeOnCreateCode();
 

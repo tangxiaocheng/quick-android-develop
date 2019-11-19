@@ -32,7 +32,7 @@ public JsonMakeBean( int jsonStringIndex,
 		this.javaJsonBeanClassPackageName = javaJsonBeanClassPackageName;
 		this.sourceString = sourceString;
 		this.className = className;
-		this.systemOut = new Save2File(this.className, "/Users/tangdengcheng/Documents/github_workplace/JavaBase/JavaUtil/src/com/tangdengcheng/opt/xml/to/code/", "java");
+		this.systemOut = new Save2File(this.className, Viewstant.PROJECT_FILE_PATH+"/file", "java");
 	}
 
 public void make() {

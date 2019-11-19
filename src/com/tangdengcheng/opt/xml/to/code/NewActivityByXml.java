@@ -403,7 +403,7 @@ public class NewActivityByXml {
 		String lastLine = "";
 		try {
 		
-			System.out.println("xmlAbsoultPath："+xmlAbsoultPath);
+			System.out.println("xmlAbsolutePath："+xmlAbsoultPath);
 			bufferedReader = new BufferedReader((new FileReader(xmlAbsoultPath)));
 			while (bufferedReader.read() != -1) {
 				String readLineTemp = bufferedReader.readLine();

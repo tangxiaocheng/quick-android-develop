@@ -32,6 +32,9 @@ public JsonMakeBean( int jsonStringIndex,
 		this.javaJsonBeanClassPackageName = javaJsonBeanClassPackageName;
 		this.sourceString = sourceString;
 		this.className = className;
+
+		/Users/randy/workspace/InfiniteJokes/app/build/generated/ap_generated_sources/debug/out/run/demo/autovalue
+//		this.systemOut = new Save2File(this.className, "/Users/tangdengcheng/Documents/github_workplace/JavaBase/JavaUtil/src/com/tangdengcheng/opt/xml/to/code/", "java");
 		this.systemOut = new Save2File(this.className, "/Users/tangdengcheng/Documents/github_workplace/JavaBase/JavaUtil/src/com/tangdengcheng/opt/xml/to/code/", "java");
 	}
 

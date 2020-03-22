@@ -1,14 +1,12 @@
 package com.tangdengcheng.opt.xml.to.code;
 
+import com.tangdengcheng.www.util.JsonUtil;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.tangdengcheng.www.util.JsonUtil;
 
 public class JsonMakeBean {
 
@@ -32,7 +30,10 @@ public JsonMakeBean( int jsonStringIndex,
 		this.javaJsonBeanClassPackageName = javaJsonBeanClassPackageName;
 		this.sourceString = sourceString;
 		this.className = className;
-		this.systemOut = new Save2File(this.className, Viewstant.PROJECT_FILE_PATH+"/file", "java");
+
+		/Users/randy/workspace/InfiniteJokes/app/build/generated/ap_generated_sources/debug/out/run/demo/autovalue
+//		this.systemOut = new Save2File(this.className, "/Users/tangdengcheng/Documents/github_workplace/JavaBase/JavaUtil/src/com/tangdengcheng/opt/xml/to/code/", "java");
+		this.systemOut = new Save2File(this.className, "/Users/tangdengcheng/Documents/github_workplace/JavaBase/JavaUtil/src/com/tangdengcheng/opt/xml/to/code/", "java");
 	}
 
 public void make() {

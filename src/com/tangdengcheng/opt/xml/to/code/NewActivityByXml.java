@@ -17,11 +17,11 @@ import com.tangdengcheng.www.util.TextUtils;
 
 public class NewActivityByXml {
 
-	private boolean initMapSuccessFull=true;
+	private boolean initMapSuccessful =true;
 	private static final String NULL_STRING_2 = "		";// "		"
 
 	private static final String NULL_STRING_1 = "	";// "	"
-	private static final String XML_SUFFX = ".xml";
+	private static final String XML_SUFFIX = ".xml";
 	private static final String VIEW_HOLDER_CLASS_NAME = "ViewHolder";
 	public static final String FAKE_TAG = "_fake";
 	private static final String CONVERT_VIEW = "convertView";
@@ -37,13 +37,13 @@ public class NewActivityByXml {
 	private String className;
 	private LinkedHashMap<String, String> idViewMap;
 	private List< String> viewList;
-	private String mainfestPath;
+	private String manifestPath;
 	private String baseActivityName;
 	private String projectPath;
 	private XmlModel xmlModel;
 	public NewActivityByXml(String projectPath,
-			boolean isMakeOnClickListener, boolean isMakeSetText,
-			String classPackageName,String xmlName_, String appPackageName, boolean eclipseProject, String xmlJson) {
+							boolean isMakeOnClickListener, boolean isMakeSetText,
+							String classPackageName, String xmlName_, String appPackageName, String xmlJson) {
 		super();
 		this.projectPath = projectPath;
 		if (TextUtils.isEmpty(xmlName_)) {
@@ -59,16 +59,10 @@ public class NewActivityByXml {
 		this.xmlName = xmlName_;
 		
 		className = StringUtil.getActivityName(xmlName_.replace("activity_", "")+"_activity");
-		
-		if (eclipseProject) {
-			mainfestPath = projectPath+"/"+"AndroidManifest.xml";
-			xmlPath = projectPath+"/res/layout/";
-			classPath = projectPath+"/src/";
-		}else {
-			mainfestPath = projectPath+"/src/main/"+"AndroidManifest.xml";
-			xmlPath=projectPath+"/src/main/res/layout/";
-			classPath = projectPath+"/src/main/java/";
-		}
+
+		manifestPath = projectPath+"/src/main/"+"AndroidManifest.xml";
+		xmlPath=projectPath+"/src/main/res/layout/";
+		classPath = projectPath+"/src/main/java/";
 		
 		
 		activitySystemOut =new Save2File(className,classPath + classPackageName.replace(".", "/") + "/", "java");
@@ -104,7 +98,7 @@ public class NewActivityByXml {
 		
 		 activitySystemOut =new Save2File(className,classPath + classPackageName.replace(".", "/") + "/", "java");
 		
-		if (!initMapSuccessFull) {
+		if (!initMapSuccessful) {
 			System.out.println("initMapSuccessFull fail , please check");
 			return;
 		}
@@ -181,21 +175,21 @@ public class NewActivityByXml {
 			modelClassName =StringUtil.changeFirstToUpper(listViewId)+"Model";
 			itemXmlName=StringUtil.getXmlName(listViewId)+"_item";
 			System.err.println(className+"-----"+adapterClassName+"----"+modelClassName+"-----"+itemXmlName);
-			String adapterPackgeName=classPackageName.replace("activity", "adapter") ;
-			String modelPackgeName=classPackageName.replace("activity", "model") ;
+			String adapterPackageName=classPackageName.replace("activity", "adapter") ;
+			String modelPackageName=classPackageName.replace("activity", "model") ;
 			
-			System.err.println(adapterPackgeName+"---"+modelPackgeName);
+			System.err.println(adapterPackageName+"---"+modelPackageName);
 			
-			activitySystemOut.println("import "+adapterPackgeName+"."+adapterClassName+";");
-			activitySystemOut.println("import "+modelPackgeName+"."+modelClassName+";");
+			activitySystemOut.println("import "+adapterPackageName+"."+adapterClassName+";");
+			activitySystemOut.println("import "+modelPackageName+"."+modelClassName+";");
 			
-			//判断xml文件是否存在，如已经存在，则不在生产 listview item xml 文件
+			//判断xml文件是否存在，如已经存在，则不在生产 ListView item xml 文件
 			
 			String pathname = xmlPath+itemXmlName+".xml";
 			
 			File item_xml = new File(pathname);
 			if (null!=item_xml&&item_xml.exists()) {
-				System.out.println("listview item : -------------------------------------> "+item_xml.getAbsolutePath());
+				System.out.println("ListView item : -------------------------------------> "+item_xml.getAbsolutePath());
 			}else {
 				Save2File xmlSystemOut =new Save2File(itemXmlName,xmlPath, "xml");
 				xmlSystemOut.println("<RelativeLayout xmlns:android="+Viewstant.SHUANG_YIN_HAO+"http://schemas.android.com/apk/res/android"+Viewstant.SHUANG_YIN_HAO);
@@ -209,14 +203,14 @@ public class NewActivityByXml {
 			
 			
 			
-			NewActivityByXml adapterByXml =new NewActivityByXml(projectPath, needSetOnClickListener, needSetOnClickListener, modelClassName, itemXmlName, adapterPackgeName, true, null);
+			NewActivityByXml adapterByXml =new NewActivityByXml(projectPath, needSetOnClickListener, needSetOnClickListener, modelClassName, itemXmlName, adapterPackageName, null);
 		
 			String listItemFindViewCode  = adapterByXml.makeGetViewCode(xmlPath,itemXmlName,".xml");
 			
 			
 			
-			Save2File modelSystemOut =new Save2File(modelClassName,classPath+modelPackgeName.replace(".", "/")+"/" , "java");
-			modelSystemOut.println("package "+modelPackgeName+";");
+			Save2File modelSystemOut =new Save2File(modelClassName,classPath+modelPackageName.replace(".", "/")+"/" , "java");
+			modelSystemOut.println("package "+modelPackageName+";");
 			modelSystemOut.println();
 			modelSystemOut.println("public class "+modelClassName+"{");
 			modelSystemOut.println("}");
@@ -225,9 +219,9 @@ public class NewActivityByXml {
 			
 			
 			//adapterSystemOut 需要更具xml文件生产adapter
-			Save2File adapterSystemOut =new Save2File(adapterClassName,classPath+adapterPackgeName.replace(".", "/")+"/" , "java");
+			Save2File adapterSystemOut =new Save2File(adapterClassName,classPath+adapterPackageName.replace(".", "/")+"/" , "java");
 			
-			adapterSystemOut.println("package "+adapterPackgeName+";");
+			adapterSystemOut.println("package "+adapterPackageName+";");
 			adapterSystemOut.println();
 			adapterSystemOut.println("import java.util.List;");
 			adapterSystemOut.println();
@@ -241,7 +235,7 @@ public class NewActivityByXml {
 			adapterSystemOut.println();
 			
 			adapterSystemOut.println("import "+appPackageName+".R;");
-			adapterSystemOut.println("import "+modelPackgeName+"."+modelClassName+";");
+			adapterSystemOut.println("import "+modelPackageName+"."+modelClassName+";");
 			
 			adapterSystemOut.println();
 			adapterSystemOut.println("public class "+adapterClassName+" extends BaseAdapter implements OnItemClickListener {");
@@ -436,7 +430,7 @@ public class NewActivityByXml {
 				bufferedReader.close();
 			}
 		} catch (Exception e) {
-			initMapSuccessFull=false;
+			initMapSuccessful =false;
 			e.printStackTrace();
 		}
 	}
@@ -446,8 +440,7 @@ public class NewActivityByXml {
 	 */
 	public  String makeGetViewCode(String name, String classPath, String fileSuffix) {
 		
-		StringBuffer importStringBuffer =new StringBuffer();
-		
+
 		Save2File activitySystemOut = new Save2File(name, classPath, fileSuffix);
 		
 		activitySystemOut.println("    " + "private final static class "
@@ -467,8 +460,8 @@ public class NewActivityByXml {
 				+ "public View getView(int position, View " + CONVERT_VIEW
 				+ ", ViewGroup parentViewGroup) {");
 
-		String xmlString = xmlName.contains(XML_SUFFX) ? xmlName.replace(
-				XML_SUFFX, "") : xmlName;
+		String xmlString = xmlName.contains(XML_SUFFIX) ? xmlName.replace(
+				XML_SUFFIX, "") : xmlName;
 
 		final String firstString = new String(
 				new char[] { VIEW_HOLDER_CLASS_NAME.charAt(0) });
@@ -547,8 +540,8 @@ public class NewActivityByXml {
 		BufferedReader bufferedReader=null;
 		BufferedWriter bufferedWriter=null;
 		try {
-			System.err.println("mainfestPath:"+mainfestPath);
-			File file = new File(mainfestPath);
+			System.err.println("manifestPath:"+ manifestPath);
+			File file = new File(manifestPath);
 			if (null!=file&&file.isFile()) {
 				System.out.println("file is exist");
 				StringBuffer buffer =new StringBuffer();

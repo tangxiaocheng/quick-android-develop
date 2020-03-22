@@ -8,7 +8,7 @@ public class Save2File {
   private String classPath;
   private String fileSuffix;
 
-  public Save2File(String name, String classPath, String fileSuffix) {
+  Save2File(String name, String classPath, String fileSuffix) {
     super();
     this.className = name;
     this.classPath = classPath;

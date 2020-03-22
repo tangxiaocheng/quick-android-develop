@@ -6,7 +6,6 @@ import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -36,7 +35,7 @@ public class FileService {
    */
   public static String readStringFromFile(String fileAbsolutePath) {
     BufferedReader bufferedReader = null;
-    StringBuffer stringBuffer = new StringBuffer();
+    StringBuilder stringBuffer = new StringBuilder();
     try {
       bufferedReader = new BufferedReader(new FileReader(fileAbsolutePath));
       String readLineString;
@@ -59,9 +58,9 @@ public class FileService {
     return stringBuffer.toString();
   }
 
-  public static String readStringFromFileAddXmlHead(String fileAbsolutePath, String xmlHeadString) {
+  static String readStringFromFileAddXmlHead(String fileAbsolutePath, String xmlHeadString) {
     BufferedReader bufferedReader = null;
-    StringBuffer stringBuffer = new StringBuffer();
+    StringBuilder stringBuffer = new StringBuilder();
     try {
       bufferedReader = new BufferedReader(new FileReader(fileAbsolutePath));
       String readLineString;
@@ -84,7 +83,6 @@ public class FileService {
         try {
           bufferedReader.close();
         } catch (IOException e) {
-          // TODO Auto-generated catch block
           e.printStackTrace();
         }
       }
@@ -108,7 +106,7 @@ public class FileService {
     byte[] data = null;
     try {
       File logFile = new File(file);
-      if (logFile != null && logFile.exists()) {
+      if (logFile.exists()) {
         inStream = new FileInputStream(logFile);
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         byte[] buffer = new byte[1024]; // 定义一个字节数组
@@ -120,8 +118,6 @@ public class FileService {
         outStream.close();
         inStream.close();
       }
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -137,17 +133,17 @@ public class FileService {
    */
   public static synchronized void saveStringToFile(
       String path, String jsonData, String jsonFileName) {
-    String fileAbsoultPath = path + "/" + jsonFileName;
+    String fileAbsolutePath = path + "/" + jsonFileName;
     checkDir(path);
-    saveStringToFile(fileAbsoultPath, jsonData);
+    saveStringToFile(fileAbsolutePath, jsonData);
   }
 
-  public static synchronized void saveStringToFile(String fileAbsoultPath, String jsonData) {
-    System.out.println("saveStringToFile:" + fileAbsoultPath);
+  public static synchronized void saveStringToFile(String fileAbsolutePath, String jsonData) {
+    System.out.println("saveStringToFile:" + fileAbsolutePath);
     if (TextUtils.isEmpty(jsonData)) {
       try {
-        File logFile = new File(fileAbsoultPath);
-        if (logFile != null && logFile.exists()) {
+        File logFile = new File(fileAbsolutePath);
+        if (logFile.exists()) {
           logFile.delete();
         }
       } catch (Exception e) {
@@ -156,13 +152,13 @@ public class FileService {
     }
     try {
       FileWriter fw;
-      File logFile = new File(fileAbsoultPath);
-      if (logFile != null && logFile.exists()) {
-        logFile.delete();
+      File logFile = new File(fileAbsolutePath);
+      if (logFile.exists()) {
+        final boolean delete = logFile.delete();
       } else {
-        logFile.createNewFile();
+        final boolean newFile = logFile.createNewFile();
       }
-      fw = new FileWriter(fileAbsoultPath, true);
+      fw = new FileWriter(fileAbsolutePath, true);
       BufferedWriter bw = new BufferedWriter(fw);
       bw.write(jsonData);
       bw.close();

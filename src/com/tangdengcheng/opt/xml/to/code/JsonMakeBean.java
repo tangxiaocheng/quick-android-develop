@@ -52,8 +52,7 @@ public class JsonMakeBean {
     systemOut.println("public class " + className + " {");
     loopJson(this.sourceString, "");
 
-    for (Iterator<String> iterator = totalMap.keySet().iterator(); iterator.hasNext(); ) {
-      String key = iterator.next();
+    for (String key : totalMap.keySet()) {
       String value = totalMap.get(key);
       systemOut.println("	private" + " " + value + " " + key + " ;");
     }

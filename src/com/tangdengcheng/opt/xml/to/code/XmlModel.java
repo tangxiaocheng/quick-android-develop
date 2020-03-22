@@ -64,7 +64,7 @@ public class XmlModel {
       String llo = null;
       if (key.contains(S_S)) {
         String[] split = key.split(S_S);
-        viewType = StringUtil.getFristToUpperCase(split[0]);
+        viewType = StringUtil.getFirstToUpperCase(split[0]);
         String factViewType = Viewstant.getViewByTt(viewType);
         if (viewType.equalsIgnoreCase(Viewstant.getLitterCase(Viewstant.LINEAR_LAYOUT))
             || viewType.equalsIgnoreCase(Viewstant.getLitterCase(Viewstant.RADIO_GROUP))) {
@@ -82,14 +82,14 @@ public class XmlModel {
       } else if (key.contains(X_X)) {
 
         String[] split = key.split(X_X);
-        viewType = StringUtil.getFristToUpperCase(split[0]);
+        viewType = StringUtil.getFirstToUpperCase(split[0]);
         if (viewType.equalsIgnoreCase(Viewstant.getLitterCase(Viewstant.LINEAR_LAYOUT))
             || viewType.equalsIgnoreCase(Viewstant.getLitterCase(Viewstant.RADIO_GROUP))) {
           llo = "h".equals(split[1]) ? Viewstant.HORIZONTAL : Viewstant.VERTICAL;
         }
         viewId = split[0] + NewActivityByXml.FAKE_TAG;
       } else {
-        viewType = StringUtil.getFristToUpperCase(key);
+        viewType = StringUtil.getFirstToUpperCase(key);
         viewId = key + NewActivityByXml.FAKE_TAG;
       }
       String factViewType = Viewstant.getViewByTt(viewType);

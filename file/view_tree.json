@@ -1,20 +1,17 @@
 {
-  "ll#v" : {
-   
-      "b@save":"",
-      "lv@users":{
-        "ll#v":{
-           "tv@name":"",
-            "v@_fake_2":"",
-            "v@line2":"",
-            "tv@age":"",
-            "tv@sex":"",
-            "iv@icon":""
-        }
-         
-        },
-      "v@_fake":"",
-      "v@line":""
-    }
+  "ll#v": {
+    "b@save": "",
+    "lv@jokes": {
+      "ll#v": {
+        "tv@name": "",
+        "v@_fake_2": "",
+        "v@line2": "",
+        "tv@age": "",
+        "tv@sex": "",
+        "iv@icon": ""
+      }
+    },
+    "v@_fake": "",
+    "v@line": ""
   }
 }

@@ -15,14 +15,14 @@ import tangxiaocheng.log.StringUtil;
 
 public class NewActivityByXml {
 
-  private boolean initMapSuccessful = true;
+  public static final String FAKE_TAG = "_fake";
   private static final String NULL_STRING_2 = "		"; // "		"
 
   private static final String NULL_STRING_1 = "	"; // "	"
   private static final String XML_SUFFIX = ".xml";
   private static final String VIEW_HOLDER_CLASS_NAME = "ViewHolder";
-  public static final String FAKE_TAG = "_fake";
   private static final String CONVERT_VIEW = "convertView";
+  private boolean initMapSuccessful = true;
   private String classPath;
   private String xmlPath;
   private String xmlName;
@@ -32,7 +32,7 @@ public class NewActivityByXml {
   private String classPackageName;
   private String appPackageName;
   private Save2File activitySystemOut;
-  private String className;
+  private String activityName;
   private LinkedHashMap<String, String> idViewMap;
   private List<String> viewList;
   private String manifestPath;
@@ -45,12 +45,12 @@ public class NewActivityByXml {
       boolean isMakeOnClickListener,
       boolean isMakeSetText,
       String classPackageName,
-      String xmlName_,
+      String layoutFileName,
       String appPackageName,
       String xmlJson) {
     super();
     this.projectPath = projectPath;
-    if (TextUtils.isEmpty(xmlName_)) {
+    if (TextUtils.isEmpty(layoutFileName)) {
       System.err.println("XML_NAME==null return");
       return;
     } else {
@@ -60,37 +60,37 @@ public class NewActivityByXml {
     this.isMakeSetText = isMakeSetText;
     this.classPackageName = classPackageName;
     this.appPackageName = appPackageName;
-    this.xmlName = xmlName_;
+    this.xmlName = layoutFileName;
 
-    className = StringUtil.getActivityName(xmlName_.replace("activity_", "") + "_activity");
+    activityName = StringUtil.getActivityName(layoutFileName.replace("activity_", "") + "_activity");
 
     manifestPath = projectPath + "/src/main/" + "AndroidManifest.xml";
     xmlPath = projectPath + "/src/main/res/layout/";
     classPath = projectPath + "/src/main/java/";
 
     activitySystemOut =
-        new Save2File(className, classPath + classPackageName.replace(".", "/") + "/", "java");
-    String xmlAbsoultPath = xmlPath + xmlName + ".xml";
+        new Save2File(activityName, classPath + classPackageName.replace(".", "/") + "/", "java");
+    String xmlAbsolutePath = xmlPath + xmlName + ".xml";
 
     if (!TextUtils.isEmpty(xmlJson)) {
-      this.xmlModel = new XmlModel(xmlJson, xmlAbsoultPath, xmlPath);
+      this.xmlModel = new XmlModel(xmlJson, xmlAbsolutePath, xmlPath);
       xmlModel.initXml();
     } else {
 
-      StringBuffer buffer = new StringBuffer();
+      StringBuilder buffer = new StringBuilder();
 
-      if (!new File(xmlAbsoultPath).exists()) {
+      if (!new File(xmlAbsolutePath).exists()) {
         String fileAbsolutePath = Viewstant.PROJECT_FILE_PATH + "/LinearLayoutTop.xml";
         String readStringFromFile =
             FileService.readStringFromFileAddXmlHead(fileAbsolutePath, Viewstant.ANDROID_XML_HEAD);
         buffer.append(readStringFromFile);
         System.out.println(buffer.toString());
-        FileService.saveStringToFile(xmlAbsoultPath, buffer.toString());
+        FileService.saveStringToFile(xmlAbsolutePath, buffer.toString());
       }
     }
 
     {
-      initMap(xmlAbsoultPath);
+      initMap(xmlAbsolutePath);
     }
   }
 
@@ -98,7 +98,7 @@ public class NewActivityByXml {
   public void makeOnCreateCode() {
 
     activitySystemOut =
-        new Save2File(className, classPath + classPackageName.replace(".", "/") + "/", "java");
+        new Save2File(activityName, classPath + classPackageName.replace(".", "/") + "/", "java");
 
     if (!initMapSuccessful) {
       System.out.println("initMapSuccessFull fail , please check");
@@ -114,8 +114,7 @@ public class NewActivityByXml {
     activitySystemOut.println();
 
     boolean needSetOnClickListener = false;
-    for (Iterator<String> iterator = viewList.iterator(); iterator.hasNext(); ) {
-      String view = iterator.next();
+    for (String view : viewList) {
       needSetOnClickListener = isNeedSetOnClickListener(view);
       if (needSetOnClickListener) {
         activitySystemOut.println("import android.view.View.OnClickListener;");
@@ -174,7 +173,7 @@ public class NewActivityByXml {
       modelClassName = StringUtil.changeFirstToUpper(listViewId) + "Model";
       itemXmlName = StringUtil.getXmlName(listViewId) + "_item";
       System.err.println(
-          className + "-----" + adapterClassName + "----" + modelClassName + "-----" + itemXmlName);
+          activityName + "-----" + adapterClassName + "----" + modelClassName + "-----" + itemXmlName);
       String adapterPackageName = classPackageName.replace("activity", "adapter");
       String modelPackageName = classPackageName.replace("activity", "model");
 
@@ -188,7 +187,7 @@ public class NewActivityByXml {
       String pathname = xmlPath + itemXmlName + ".xml";
 
       File item_xml = new File(pathname);
-      if (null != item_xml && item_xml.exists()) {
+      if (item_xml.exists()) {
         System.out.println(
             "ListView item : -------------------------------------> " + item_xml.getAbsolutePath());
       } else {
@@ -340,15 +339,14 @@ public class NewActivityByXml {
 
     String firstClassLineString =
         "public  class "
-            + className
+            + activityName
             + " extends  "
             + baseActivityName
             + (needSetOnClickListener ? " implements OnClickListener" : "")
             + " {";
     activitySystemOut.println(firstClassLineString);
 
-    for (Iterator<String> iterator = idViewMap.keySet().iterator(); iterator.hasNext(); ) {
-      String id = (String) iterator.next();
+    for (String id : idViewMap.keySet()) {
       activitySystemOut.println(NULL_STRING_1 + "private " + idViewMap.get(id) + " " + id + ";");
     }
     activitySystemOut.println();
@@ -373,7 +371,7 @@ public class NewActivityByXml {
       String id = iterator.next();
       String string = idViewMap.get(id);
       activitySystemOut.println(
-          NULL_STRING_2 + id + " = (" + string + ")findViewById(R.id." + id + ");");
+          NULL_STRING_2 + id + " = findViewById(R.id." + id + ");");
       if (Viewstant.LIST_VIEW.equals(string)
           || Viewstant.GRID_VIEW.equals(string)
           || string.contains(Viewstant.GRID_VIEW)
@@ -458,15 +456,15 @@ public class NewActivityByXml {
         || Viewstant.VIEW.equals(string);
   }
 
-  private void initMap(String xmlAbsoultPath) {
+  private void initMap(String xmlAbsolutePath) {
     idViewMap = new LinkedHashMap<String, String>();
     viewList = new ArrayList<String>();
     BufferedReader bufferedReader = null;
     String lastLine = "";
     try {
 
-      System.out.println("xmlAbsolutePath：" + xmlAbsoultPath);
-      bufferedReader = new BufferedReader((new FileReader(xmlAbsoultPath)));
+      System.out.println("xmlAbsolutePath：" + xmlAbsolutePath);
+      bufferedReader = new BufferedReader((new FileReader(xmlAbsolutePath)));
       while (bufferedReader.read() != -1) {
         String readLineTemp = bufferedReader.readLine();
         if (readLineTemp != null) {
@@ -488,9 +486,7 @@ public class NewActivityByXml {
           }
         }
       }
-      if (bufferedReader != null) {
-        bufferedReader.close();
-      }
+      bufferedReader.close();
     } catch (Exception e) {
       initMapSuccessful = false;
       e.printStackTrace();
@@ -548,7 +544,7 @@ public class NewActivityByXml {
     //
 
     for (Iterator<String> iterator = idViewMap.keySet().iterator(); iterator.hasNext(); ) {
-      String id = (String) iterator.next();
+      String id = iterator.next();
       String viewType = idViewMap.get(id);
 
       //
@@ -559,9 +555,7 @@ public class NewActivityByXml {
               + classObject
               + "."
               + id
-              + " = ("
-              + viewType
-              + ")"
+              + " = "
               + CONVERT_VIEW
               + "."
               + "findViewById(R.id."
@@ -615,7 +609,7 @@ public class NewActivityByXml {
     try {
       System.err.println("manifestPath:" + manifestPath);
       File file = new File(manifestPath);
-      if (null != file && file.isFile()) {
+      if (file.isFile()) {
         System.out.println("file is exist");
         StringBuffer buffer = new StringBuffer();
         bufferedReader = new BufferedReader(new FileReader(file));
@@ -625,7 +619,7 @@ public class NewActivityByXml {
                 + Viewstant.SHUANG_YIN_HAO
                 + classPackageName
                 + "."
-                + className
+                + activityName
                 + Viewstant.SHUANG_YIN_HAO;
         while ((readLine = bufferedReader.readLine()) != null) {
           if (readLine.contains(currentActivity)) {
@@ -640,13 +634,8 @@ public class NewActivityByXml {
         }
         bufferedReader.close();
         buffer.append(
-            "        <activity android:screenOrientation="
-                + Viewstant.SHUANG_YIN_HAO
-                + "portrait"
-                + Viewstant.SHUANG_YIN_HAO
-                + "  "
-                + currentActivity
-                + " >");
+            "        <activity android:screenOrientation=" + Viewstant.SHUANG_YIN_HAO + "portrait"
+                + Viewstant.SHUANG_YIN_HAO + "  ").append(currentActivity).append(" >");
         //				buffer.append("        <activity " + currentActivity + " >");
         buffer.append(com.tangdengcheng.opt.xml.to.code.Viewstant.LINE_SEPARATOR);
         buffer.append("        </activity>");

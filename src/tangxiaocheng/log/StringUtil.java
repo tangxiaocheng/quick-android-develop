@@ -2,8 +2,8 @@ package tangxiaocheng.log;
 
 public class StringUtil {
 
-  public static String getFristToUpperCase(String word) {
-    StringBuffer buffer = new StringBuffer();
+  public static String getFirstToUpperCase(String word) {
+    StringBuilder buffer = new StringBuilder();
     char[] charArray = word.toCharArray();
     for (int i = 0; i < charArray.length; i++) {
       char c = charArray[i];
@@ -13,12 +13,11 @@ public class StringUtil {
         buffer.append(c);
       }
     }
-    String newString = buffer.toString();
-    return newString;
+    return buffer.toString();
   }
 
   public static String getActivityName(String word) {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
     char[] charArray = word.toCharArray();
     for (int i = 0; i < charArray.length; i++) {
       char c = charArray[i];
@@ -37,12 +36,11 @@ public class StringUtil {
         }
       }
     }
-    String newString = buffer.toString();
-    return newString;
+    return buffer.toString();
   }
 
   public static String getXmlName(String word) {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
 
     char[] charArray = word.toCharArray();
     for (int i = 0; i < charArray.length; i++) {
@@ -57,12 +55,11 @@ public class StringUtil {
         }
       }
     }
-    String newString = buffer.toString();
-    return newString;
+    return buffer.toString();
   }
 
   public static String getAdapterName(String word) {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
     char[] charArray = word.toCharArray();
     for (int i = 0; i < charArray.length; i++) {
       char c = charArray[i];
@@ -73,12 +70,11 @@ public class StringUtil {
       }
     }
     buffer.append("Adapter");
-    String newString = buffer.toString();
-    return newString;
+    return buffer.toString();
   }
 
   public static String changeFirstToUpper(String word) {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
     char[] charArray = word.toCharArray();
     for (int i = 0; i < charArray.length; i++) {
       char c = charArray[i];
@@ -88,14 +84,13 @@ public class StringUtil {
         buffer.append(c);
       }
     }
-    String newString = buffer.toString();
-    return newString;
+    return buffer.toString();
   }
 
   public static boolean hasUpperCase(String word) {
     char[] charArray = word.toCharArray();
-    for (int i = 0; i < charArray.length; i++) {
-      if (Character.isUpperCase(charArray[i])) {
+    for (char c : charArray) {
+      if (Character.isUpperCase(c)) {
         return true;
       }
     }

@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="libs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/jackson-core-2.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/commons-logging.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/java-json.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/jsonschema2pojo-core-0.4.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/commons-httpclient-3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/jackson-databind-2.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/codemodel-2.4.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/commons-codec-1.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/gson-2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/log4j-1.2.16.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/commons-lang3-3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/jackson-annotations-2.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

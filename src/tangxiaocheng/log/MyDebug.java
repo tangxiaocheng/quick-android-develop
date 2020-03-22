@@ -4,8 +4,8 @@
  */
 package tangxiaocheng.log;
 
-import com.tangdengcheng.opt.xml.to.code.FileService;
-import com.tangdengcheng.www.util.TextUtils;
+import opt.xml.to.code.FileService;
+import opt.xml.util.TextUtils;
 import java.io.File;
 
 /** 打印日志工具类 */

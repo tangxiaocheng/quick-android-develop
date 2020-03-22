@@ -1,4 +1,4 @@
-package com.tangdengcheng.opt.xml.to.code;
+package opt.xml.to.code;
 
 import tangxiaocheng.log.MyDebug;
 

@@ -1,4 +1,4 @@
-package com.tangdengcheng.www.util;
+package opt.xml.util;
 
 import org.json.JSONArray;
 import org.json.JSONException;

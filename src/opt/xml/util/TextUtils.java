@@ -1,4 +1,4 @@
-package com.tangdengcheng.www.util;
+package opt.xml.util;
 
 public class TextUtils {
 

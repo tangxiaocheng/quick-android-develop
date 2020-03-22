@@ -1,6 +1,6 @@
-package com.tangdengcheng.opt.xml.to.code;
+package opt.xml.to.code;
 
-import com.tangdengcheng.www.util.JsonUtil;
+import opt.xml.util.JsonUtil;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;

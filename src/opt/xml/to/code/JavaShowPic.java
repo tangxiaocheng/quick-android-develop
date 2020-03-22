@@ -1,4 +1,4 @@
-package com.tangdengcheng.opt.xml.to.code;
+package opt.xml.to.code;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;

@@ -1,6 +1,6 @@
-package com.tangdengcheng.opt.xml.to.code;
+package opt.xml.to.code;
 
-import com.tangdengcheng.www.util.TextUtils;
+import opt.xml.util.TextUtils;
 import java.util.Iterator;
 import org.json.JSONException;
 import org.json.JSONObject;

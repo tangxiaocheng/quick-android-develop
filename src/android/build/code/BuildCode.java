@@ -1,7 +1,7 @@
 package android.build.code;
 
-import com.tangdengcheng.opt.xml.to.code.NewActivityByXml;
-import com.tangdengcheng.opt.xml.to.code.Viewstant;
+import opt.xml.to.code.NewActivityByXml;
+import opt.xml.to.code.Viewstant;
 
 public class BuildCode {
   public static void main(String[] args) {

@@ -1,14 +1,12 @@
 package com.tangdengcheng.opt.xml.to.code;
 
+import com.tangdengcheng.www.util.JsonUtil;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.tangdengcheng.www.util.JsonUtil;
 
 public class JsonMakeBean {
 

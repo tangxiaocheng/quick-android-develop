@@ -3,15 +3,15 @@
     "b@save": "",
     "lv@devices": {
       "ll#v": {
+        "iv@deviceIcon": "",
         "tv@name": "",
+        "cb@status": "",
         "v@_fake_2": "",
-        "v@line2": "",
-        "tv@age": "",
-        "tv@sex": "",
-        "iv@icon": ""
+        "v@line2": ""
       }
     },
     "v@_fake": "",
-    "v@line": ""
+    "v@line": "",
+    "iv@camera": ""
   }
 }

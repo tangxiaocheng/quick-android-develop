@@ -262,6 +262,7 @@ public class NewActivityByXml {
             adapterSystemOut.println("import android.widget.BaseAdapter;");
             adapterSystemOut.println();
             adapterSystemOut.println("import android.widget.ImageView;");
+            adapterSystemOut.println("import android.widget.CheckBox;");
             adapterSystemOut.println("import android.widget.TextView;");
             adapterSystemOut.println("import " + appPackageName + ".R;");
             adapterSystemOut.println("import " + modelPackageName + "." + modelClassName + ";");

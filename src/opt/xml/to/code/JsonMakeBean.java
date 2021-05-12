@@ -72,7 +72,7 @@ public class JsonMakeBean {
 
     String string3 = ".json";
     String string2 = "test_json_bean";
-    String jsonPath = "/Users/randy/quick-android-develop/file/";
+    String jsonPath = "/Users/randytang/StudioProjects/quick-android-develop/file/";
     String jsonFile = jsonPath + string2 + string3;
     String tempSourceString = FileService.readStringFromFile(jsonFile);
     String tempSourceString2 = FileService.readStringFromFile(jsonPath, string2 + string3);
@@ -80,8 +80,8 @@ public class JsonMakeBean {
     System.err.println(tempSourceString);
     System.err.println(tempSourceString2);
 
-    //		JsonMakeBean jsonMakeBean = new JsonMakeBean ();
-    //		jsonMakeBean.make ();
+    		JsonMakeBean jsonMakeBean = new JsonMakeBean (1,2,3,"pac","source", "name");
+    		jsonMakeBean.make ();
   }
 
   public void loopJson(String sourceString, String jsonKey) {

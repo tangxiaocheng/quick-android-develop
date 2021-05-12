@@ -11,14 +11,14 @@ public class BuildCode {
 
     String xmlJson = "view_tree.json";
 
-    String androidAppPath = "/Users/randytang/AndroidStudioProjects/WyzeSkeletonApp/app";
+    String androidAppPath = "/Users/randytang/StudioProjects/WyzeSkeletonApp/app";
     String targetActivityPackageName = "com.wyze.app.ui";
     String appPackageName = "com.wyze.app";
 
     NewActivityByXml makeAndroidXml2Code =
         new NewActivityByXml(
-            androidAppPath, true, true, targetActivityPackageName, "activity_joke", appPackageName, xmlJson);
-    makeAndroidXml2Code.setBaseActivityName("BaseActivity");
+            androidAppPath, true, true, targetActivityPackageName, "activity_devices", appPackageName, xmlJson);
+//    makeAndroidXml2Code.setBaseActivityName("BaseActivity");
     makeAndroidXml2Code.makeOnCreateCode();
   }
 }

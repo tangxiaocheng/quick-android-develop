@@ -1,21 +1,22 @@
 package android.build.code;
 
+import org.junit.Test;
+
 import opt.xml.to.code.NewActivityByXml;
 import opt.xml.to.code.Viewstant;
 
-public class BuildCode {
-    public static void main(String[] args) {
-        generateDevicesActivity();
-    }
 
-    public static void generateDevicesActivity() {
+public class BuildCodeTest {
+    @Test
+    public void generateDevicesActivity() {
+
         System.out.println("run... ");
         System.out.println(Viewstant.PROJECT_FILE_PATH);
 
         String xmlJson = "view_tree.json";
 
         String androidAppPath = "/Users/randytang/AndroidStudioProjects/QuickDemoForWyze/app";
-        String targetActivityPackageName = "com.wyze.app.ui";
+        String targetActivityPackageName = "com.wyze.app.ui.devices";
         String appPackageName = "com.wyze.app";
 
         NewActivityByXml makeAndroidXml2Code =
@@ -30,7 +31,8 @@ public class BuildCode {
         makeAndroidXml2Code.makeOnCreateCode();
     }
 
-    public static void generateEventsActivity() {
+    @Test
+    public void generateEventsActivity() {
         System.out.println("run... ");
         System.out.println(Viewstant.PROJECT_FILE_PATH);
 

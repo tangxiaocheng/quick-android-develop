@@ -22,6 +22,9 @@ public class Viewstant {
   public static final String TEXT_VIEW = "TextView";
   public static final String LIST_VIEW = "ListView";
   public static final String EXPANDABLE_LIST_VIEW = "ExpandableListView";
+  public static final String RECYCLER_VIEW = "RecyclerView";
+  public static final String SWIPE_REFRESH_LAYOUT = "SwipeRefreshLayout";
+  public static final String CONSTRAINT_LAYOUT = "ConstraintLayout";
 
   public static final String ACTIVITY = "Activity";
 
@@ -30,6 +33,9 @@ public class Viewstant {
     public static final String IMPORT_ANDROID_WEBKIT = "import android.webkit.";
     public static final String IMPORT_ANDROID_WIDGET = "import android.widget.";
     public static final String IMPORT_ANDROID_VIEW = "import android.view.";
+    public static final String IMPORT_ANDROIDX_RECYCLER_VIEW_WIDGET = "import androidx.recyclerview.widget.";
+    public static final String IMPORT_ANDROIDX_SWIPE_REFRESH_LAYOUT_WIDGET = "import androidx.swiperefreshlayout.widget.";
+    public static final String IMPORT_ANDROIDX_CONSTRAINT_LAYOUT_WIDGET = "import androidx.constraintlayout.widget.";
   }
 
   static final Map<String, String> ANDROID_VIEW_MAP =
@@ -56,6 +62,10 @@ public class Viewstant {
           put(TOGGLE_BUTTON, Import.IMPORT_ANDROID_WIDGET + TOGGLE_BUTTON + ";");
 
           put(WEB_VIEW, Import.IMPORT_ANDROID_WEBKIT + WEB_VIEW + ";");
+
+          put(RECYCLER_VIEW, Import.IMPORT_ANDROIDX_RECYCLER_VIEW_WIDGET + RECYCLER_VIEW + ";");
+          put(SWIPE_REFRESH_LAYOUT, Import.IMPORT_ANDROIDX_SWIPE_REFRESH_LAYOUT_WIDGET + SWIPE_REFRESH_LAYOUT + ";");
+          put(CONSTRAINT_LAYOUT, Import.IMPORT_ANDROIDX_CONSTRAINT_LAYOUT_WIDGET + CONSTRAINT_LAYOUT + ";");
         }
       };
 

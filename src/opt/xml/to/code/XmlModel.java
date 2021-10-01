@@ -139,8 +139,9 @@ public class XmlModel {
       }
 
       if (Viewstant.LIST_VIEW.equals(factViewType)
-          || Viewstant.GRID_VIEW.equals(
-              factViewType)) { // 如果实际view是listview，则将直接添加控件xml文件，将对应的JSONObject处理成 ListView
+          || Viewstant.GRID_VIEW.equals(factViewType)
+          || Viewstant.RECYCLER_VIEW.equals(factViewType)
+      ) { // 如果实际view是listview，则将直接添加控件xml文件，将对应的JSONObject处理成 ListView
                                // item的xml元素
         stringBuffer.append(viewTypeSource).append(Viewstant.LINE_SEPARATOR);
 

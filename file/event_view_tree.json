@@ -1,7 +1,7 @@
 {
   "ll#v": {
     "b@fetch": "",
-    "lv@events": {
+    "rv@events": {
       "ll#v": {
         "iv@eventVideoIcon": "",
         "tv@time": "",
@@ -11,6 +11,7 @@
       }
     },
     "v@_fake": "",
-    "iv@camera": ""
+    "cl@bottom": "",
+    "v@line3": ""
   }
 }

@@ -151,13 +151,17 @@ public class NewActivityByXml {
         String listViewId = null;
 
         if (viewList.contains(Viewstant.LIST_VIEW)
-                || viewList.contains(Viewstant.GRID_VIEW)) { // 新建adapter.java 文件，import adapter 和 model 类
+                || viewList.contains(Viewstant.GRID_VIEW)
+                || viewList.contains(Viewstant.RECYCLER_VIEW)
+        ) { // 新建adapter.java 文件，import adapter 和 model 类
             for (Iterator<String> iterator = idViewMap.keySet().iterator(); iterator.hasNext(); ) {
                 String id = iterator.next();
                 String string = idViewMap.get(id);
                 if (Viewstant.LIST_VIEW.equals(string)
                         || Viewstant.GRID_VIEW.equals(string)
+                        || Viewstant.RECYCLER_VIEW.equals(string)
                         || string.contains(Viewstant.GRID_VIEW)
+                        || string.contains(Viewstant.RECYCLER_VIEW)
                         || string.contains(Viewstant.LIST_VIEW)) {
                     listViewId = id;
                     break; // 仅仅取第一个LIST_VIEW或者GRID_VIEW控件
@@ -266,7 +270,7 @@ public class NewActivityByXml {
             adapterSystemOut.println("import android.widget.TextView;");
             adapterSystemOut.println("import " + appPackageName + ".R;");
             adapterSystemOut.println("import " + modelPackageName + "." + modelClassName + ";");
-
+//            RecyclerView.Adapter<EventsLvModel>
             adapterSystemOut.println();
             adapterSystemOut.println(
                     "public class "
@@ -382,7 +386,9 @@ public class NewActivityByXml {
                     NULL_STRING_2 + id + " = findViewById(R.id." + id + ");");
             if (Viewstant.LIST_VIEW.equals(string)
                     || Viewstant.GRID_VIEW.equals(string)
+                    || Viewstant.RECYCLER_VIEW.equals(string)
                     || string.contains(Viewstant.GRID_VIEW)
+                    || string.contains(Viewstant.RECYCLER_VIEW)
                     || string.contains(Viewstant.LIST_VIEW)) {
                 activitySystemOut.println();
                 activitySystemOut.println(
@@ -481,6 +487,11 @@ public class NewActivityByXml {
                             String key = readLine.replace("android:id=\"@+id/", "").replace(Viewstant.SHUANG_YIN_HAO, "");
                             if (lastLine.contains("<") && !lastLine.contains("android:")) { // xml文件头存在id的上一行不是对应的布局方式
                                 String value = lastLine.replace("<", "");
+                                System.out.println("valuevaluevaluevaluevalue:"+value);
+                                if (value.contains("androidx")){
+                                    final String[] split = value.split("\\.");
+                                    value = split[split.length-1];
+                                }
                                 idViewMap.put(key, value);
                                 if (!viewList.contains(value)) {
                                     viewList.add(value);

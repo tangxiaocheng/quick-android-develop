@@ -465,24 +465,21 @@ public class NewActivityByXml {
     }
 
     private void initMap(String xmlAbsolutePath) {
-        idViewMap = new LinkedHashMap<String, String>();
-        viewList = new ArrayList<String>();
+        idViewMap = new LinkedHashMap<>();
+        viewList = new ArrayList<>();
         BufferedReader bufferedReader = null;
         String lastLine = "";
         try {
-
             System.out.println("xmlAbsolutePath：" + xmlAbsolutePath);
             bufferedReader = new BufferedReader((new FileReader(xmlAbsolutePath)));
             while (bufferedReader.read() != -1) {
                 String readLineTemp = bufferedReader.readLine();
                 if (readLineTemp != null) {
-                    final String readLine = readLineTemp.toString().trim();
+                    final String readLine = readLineTemp.trim();
                     if (!readLine.contains("<!--") && !readLine.contains("-->")) { // 过滤注释行
                         if (readLine.contains("android:id=\"@+id/") && !readLine.contains(FAKE_TAG)) {
-                            String key =
-                                    readLine.replace("android:id=\"@+id/", "").replace(Viewstant.SHUANG_YIN_HAO, "");
-                            if (lastLine.contains("<")
-                                    && !lastLine.contains("android:")) { // xml文件头存在id的上一行不是对应的布局方式
+                            String key = readLine.replace("android:id=\"@+id/", "").replace(Viewstant.SHUANG_YIN_HAO, "");
+                            if (lastLine.contains("<") && !lastLine.contains("android:")) { // xml文件头存在id的上一行不是对应的布局方式
                                 String value = lastLine.replace("<", "");
                                 idViewMap.put(key, value);
                                 if (!viewList.contains(value)) {
@@ -499,6 +496,9 @@ public class NewActivityByXml {
             initMapSuccessful = false;
             e.printStackTrace();
         }
+
+        System.out.println("idViewMap:---->"+idViewMap);
+        System.out.println("viewList:---->"+viewList);
     }
 
     /**

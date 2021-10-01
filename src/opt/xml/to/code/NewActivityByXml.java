@@ -130,8 +130,8 @@ public class NewActivityByXml {
 
         if (TextUtils.isEmpty(baseActivityName)
                 || baseActivityName.equals(Viewstant.ACTIVITY)) { // TODO 添加默认的 base activity （完整路径）
-            baseActivityName = "Activity";
-            activitySystemOut.println("import android.app.Activity;");
+            baseActivityName = "AppCompatActivity";
+            activitySystemOut.println("import androidx.appcompat.app.AppCompatActivity;");
         } else {
             // TODO 导入baseActivity的包。需要设置
         }

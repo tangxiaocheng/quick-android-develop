@@ -584,17 +584,7 @@ public class NewActivityByXml {
         activitySystemOut.println(NULL_STRING_2 +NULL_STRING_1 + "}");
 
         activitySystemOut.println();
-        if (isMakeOnClickListenerForActivity) {
-            activitySystemOut.println();
-            for (String key : idViewMap.keySet()) {
 
-                if (Viewstant.BUTTON.equals(idViewMap.get(key))) {
-                    activitySystemOut.println(
-                            NULL_STRING_2 + classObject + "." + key + ".setOnClickListener(this);");
-                }
-            }
-        }
-//        activitySystemOut.println(NULL_STRING_2+NULL_STRING_1 + "}");
 
         activitySystemOut.println(NULL_STRING_2 + "}");
         activitySystemOut.println("}");

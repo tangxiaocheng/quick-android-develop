@@ -1,10 +1,14 @@
 {
   "ll#v": {
     "b@fetch": "",
+    "b@navi": "",
+    "b@delete": "",
+    "b@edit": "",
     "rv@events": {
       "ll#v": {
         "iv@eventVideoIcon": "",
-        "tv@time": ""
+        "tv@time": "",
+        "b@gotoA": ""
       }
     }
   }

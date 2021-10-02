@@ -41,6 +41,7 @@ public class NewActivityByXml {
     private String projectPath;
     private XmlModel xmlModel;
     private boolean isSetOnItemClick = true;
+    private boolean hasSwipeRefreshLayout;
 
     public NewActivityByXml(
             String projectPath,
@@ -336,6 +337,9 @@ public class NewActivityByXml {
 
             adapterSystemOut.saveStringToFile();
         }
+
+
+        hasSwipeRefreshLayout = viewList.contains("SwipeRefreshLayout");
         activitySystemOut.println();
         String firstClassLineString =
                 "public  class "
@@ -343,8 +347,8 @@ public class NewActivityByXml {
                         + " extends  "
                         + baseActivityName
                         + (needSetOnClickListener ? " implements OnClickListener" : "")
-                        + (isSetOnItemClick ? ", OnWyzeItemClickListener<" +modelClassName+
-                        ">" : "")
+                        + (isSetOnItemClick ? ", OnWyzeItemClickListener<" +modelClassName+ ">" : "")
+                        + (hasSwipeRefreshLayout ? ", SwipeRefreshLayout.OnRefreshListener" : "")
                         + " {";
         activitySystemOut.println(firstClassLineString);
 
@@ -451,6 +455,15 @@ public class NewActivityByXml {
             activitySystemOut.println(NULL_STRING_1 + "@Override");
             activitySystemOut.println(NULL_STRING_1 + "public void onItemClicked(" +modelClassName+
                     " v, int position) {");
+
+            activitySystemOut.println();
+            activitySystemOut.println(NULL_STRING_1 + "}");
+        }
+
+        if (hasSwipeRefreshLayout) {
+            activitySystemOut.println();
+            activitySystemOut.println(NULL_STRING_1 + "@Override");
+            activitySystemOut.println(NULL_STRING_1 + "public void onRefresh() {");
 
             activitySystemOut.println();
             activitySystemOut.println(NULL_STRING_1 + "}");

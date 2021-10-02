@@ -1,0 +1,20 @@
+{
+  "rl#v": {
+    "cl@top":{
+      "tv@back":""
+    },
+    "b@fetch": "",
+    "b@navi": "",
+    "b@delete": "",
+    "b@edit": "",
+    "srl@wyze": {
+      "rv@events": {
+        "ll#v": {
+          "iv@eventVideoIcon": "",
+          "tv@time": "",
+          "b@gotoA": ""
+        }
+      }
+    }
+  }
+}

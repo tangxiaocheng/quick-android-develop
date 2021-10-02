@@ -18,7 +18,7 @@ public class MyDebug {
   public static void main(String[] args) {
     MyDebug.printE("ss", "ddddd");
     MyDebug.printI("ss", "ddddd");
-    saveStringToFile("111ddd111", "3532gfjjj errewtwere", "txt");
+//    saveStringToFile("111ddd111", "3532gfjjj errewtwere", "txt");
   }
 
   public static void printI(String tag, String content) {
@@ -63,7 +63,7 @@ public class MyDebug {
     String className = stacks[2].getClassName();
     int index = className.lastIndexOf('.');
     if (index >= 0) {
-      className = className.substring(index + 1, className.length());
+      className = className.substring(index + 1);
     }
     String methodName = stacks[2].getMethodName();
     int lineNumber = stacks[2].getLineNumber();

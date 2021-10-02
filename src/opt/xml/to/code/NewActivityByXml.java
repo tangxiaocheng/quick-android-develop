@@ -90,10 +90,7 @@ public class NewActivityByXml {
                 FileService.saveStringToFile(xmlAbsolutePath, buffer.toString());
             }
         }
-
-        {
-            initMap(xmlAbsolutePath);
-        }
+        initMap(xmlAbsolutePath);
     }
 
     /**
@@ -257,6 +254,7 @@ public class NewActivityByXml {
             adapterSystemOut.println("import android.view.ViewGroup;");
             adapterSystemOut.println("import android.widget.AdapterView;");
             adapterSystemOut.println("import androidx.recyclerview.widget.RecyclerView;");
+            adapterSystemOut.println("import android.widget.Button;");
 
             adapterSystemOut.println();
             adapterSystemOut.println("import android.widget.ImageView;");
@@ -264,7 +262,6 @@ public class NewActivityByXml {
             adapterSystemOut.println("import android.widget.TextView;");
             adapterSystemOut.println("import " + appPackageName + ".R;");
             adapterSystemOut.println("import " + modelPackageName + "." + modelClassName + ";");
-//            RecyclerView.Adapter<EventsLvModel>
 
             if (isSetOnItemClick) {
                 Save2File wyzwClickInterface =

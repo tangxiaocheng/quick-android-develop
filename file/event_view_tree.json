@@ -1,14 +1,16 @@
 {
-  "ll#v": {
+  "rl#v": {
     "b@fetch": "",
     "b@navi": "",
     "b@delete": "",
     "b@edit": "",
-    "rv@events": {
-      "ll#v": {
-        "iv@eventVideoIcon": "",
-        "tv@time": "",
-        "b@gotoA": ""
+    "srl@wyze": {
+      "rv@events": {
+        "ll#v": {
+          "iv@eventVideoIcon": "",
+          "tv@time": "",
+          "b@gotoA": ""
+        }
       }
     }
   }

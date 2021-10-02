@@ -47,7 +47,6 @@ public class XmlModel {
     try {
       jsonObject = new JSONObject(json);
       optJson(jsonObject);
-      //			String fileAbsoultPath = Viewstant.PROJECT_PATH+"/test.xml";
       FileService.saveStringToFile(xmlAbsoultPath, stringBuffer.toString());
     } catch (JSONException e) {
       e.printStackTrace();
@@ -146,14 +145,11 @@ public class XmlModel {
         stringBuffer.append(viewTypeSource).append(Viewstant.LINE_SEPARATOR);
 
         Object optJson = jsonObject.opt(key);
-        if (null != optJson && optJson instanceof JSONObject) {
+        if (optJson instanceof JSONObject) {
           String listItemXmlName = tangxiaocheng.log.StringUtil.getXmlName(viewId) + "_item";
 
           System.out.println("listview id = " + viewId);
           System.out.println(listItemXmlName);
-          System.out.println();
-          System.out.println();
-          System.out.println();
           System.out.println();
           JSONObject new_name = (JSONObject) optJson;
           String itemXmlPath = xmlPath + "" + listItemXmlName + ".xml";
@@ -165,10 +161,15 @@ public class XmlModel {
 
       } else {
         Object optJson = jsonObject.opt(key);
+        System.out.println("key:------------->"+key +" view:"+factViewType+"   value:" + optJson.toString());
 
         boolean isFatherLayout = optJson instanceof JSONObject;
 
         String target = "</" + factViewType + ">";
+        if (factViewType.equals("SwipeRefreshLayout")) {
+          target = "</" + "androidx.swiperefreshlayout.widget.SwipeRefreshLayout" + ">";
+        }
+
         boolean contains = viewTypeSource.contains(target);
         if (isFatherLayout) {
           if (contains) {

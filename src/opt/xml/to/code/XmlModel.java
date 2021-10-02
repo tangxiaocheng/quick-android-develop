@@ -168,6 +168,8 @@ public class XmlModel {
         String target = "</" + factViewType + ">";
         if (factViewType.equals("SwipeRefreshLayout")) {
           target = "</" + "androidx.swiperefreshlayout.widget.SwipeRefreshLayout" + ">";
+        } else if(factViewType.equals("ConstraintLayout")){
+          target = "</" + "androidx.constraintlayout.widget.ConstraintLayout" + ">";
         }
 
         boolean contains = viewTypeSource.contains(target);

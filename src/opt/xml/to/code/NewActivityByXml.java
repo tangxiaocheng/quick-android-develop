@@ -369,14 +369,14 @@ public class NewActivityByXml {
         activitySystemOut.println();
         activitySystemOut.println(NULL_STRING_1 + "private void initView(" + "int layoutId" + "){");
         activitySystemOut.println();
-        activitySystemOut.println("		setContentView(layoutId);");
+        activitySystemOut.println(NULL_STRING_1+NULL_STRING_1+"setContentView(layoutId);");
         activitySystemOut.println();
 
         for (Iterator<String> iterator = idViewMap.keySet().iterator(); iterator.hasNext(); ) {
             String id = iterator.next();
             String string = idViewMap.get(id);
             activitySystemOut.println(
-                    NULL_STRING_2 + id + " = findViewById(R.id." + id + ");");
+                    NULL_STRING_2+NULL_STRING_1 + id + " = findViewById(R.id." + id + ");");
             if (Viewstant.LIST_VIEW.equals(string)
                     || Viewstant.GRID_VIEW.equals(string)
                     || Viewstant.RECYCLER_VIEW.equals(string)
@@ -384,21 +384,21 @@ public class NewActivityByXml {
                     || string.contains(Viewstant.RECYCLER_VIEW)
                     || string.contains(Viewstant.LIST_VIEW)) {
                 activitySystemOut.println();
-                activitySystemOut.println(NULL_STRING_2 + "List<" + modelClassName + "> adapterList =new ArrayList<" + modelClassName + ">();");
+                activitySystemOut.println(NULL_STRING_2 +NULL_STRING_1+ "List<" + modelClassName + "> adapterList =new ArrayList<" + modelClassName + ">();");
 
-                activitySystemOut.println(NULL_STRING_2 + "for (int i = 0; i < 30; i++) {");
-                activitySystemOut.println(NULL_STRING_2+NULL_STRING_1 + " adapterList.add(new " +modelClassName +
+                activitySystemOut.println(NULL_STRING_2 +NULL_STRING_1+ "for (int i = 0; i < 30; i++) {");
+                activitySystemOut.println(NULL_STRING_2+NULL_STRING_1+NULL_STRING_1 + " adapterList.add(new " +modelClassName +
                         "(\"ds\" + i));");
-                activitySystemOut.println(NULL_STRING_2 + "}");
+                activitySystemOut.println(NULL_STRING_2+NULL_STRING_1 + "}");
 
                 activitySystemOut.println(
-                        NULL_STRING_2
+                        NULL_STRING_2+NULL_STRING_1
                                 + adapterClassName
                                 + " adapter = new "
                                 + adapterClassName
                                 + "(this,adapterList);");
-                activitySystemOut.println(NULL_STRING_2 + id + ".setAdapter(" + "adapter" + ");");
-                activitySystemOut.println(NULL_STRING_2 + id + ".setLayoutManager(new GridLayoutManager(this,1));");
+                activitySystemOut.println(NULL_STRING_2+NULL_STRING_1 + id + ".setAdapter(" + "adapter" + ");");
+                activitySystemOut.println(NULL_STRING_2+NULL_STRING_1 + id + ".setLayoutManager(new GridLayoutManager(this,1));");
 
 
             }
@@ -409,7 +409,7 @@ public class NewActivityByXml {
             for (String key : idViewMap.keySet()) {
                 String string = idViewMap.get(key);
                 if (isNeedSetOnClickListener(string)) {
-                    activitySystemOut.println(NULL_STRING_2 + key + ".setOnClickListener(this);");
+                    activitySystemOut.println(NULL_STRING_2+NULL_STRING_1 + key + ".setOnClickListener(this);");
                     listenerList.add(key);
                 }
             }
@@ -436,13 +436,13 @@ public class NewActivityByXml {
             activitySystemOut.println(NULL_STRING_1 + "@Override");
             activitySystemOut.println(NULL_STRING_1 + "public void onClick(View v) {");
             if (isMakeOnClickListenerForActivity) {
-                activitySystemOut.println(NULL_STRING_2 + "int id = v.getId();");
+                activitySystemOut.println(NULL_STRING_2+NULL_STRING_1 + "int id = v.getId();");
                 int count = 0;
                 for (String string : listenerList) {
-                    activitySystemOut.println(NULL_STRING_2 + (count==0?"":"else ")+"if(id == R.id." +string+
+                    activitySystemOut.println(NULL_STRING_2 +NULL_STRING_1+ (count==0?"":"else ")+"if(id == R.id." +string+
                             "){");
                     activitySystemOut.println();
-                    activitySystemOut.println(NULL_STRING_2 + "}");
+                    activitySystemOut.println(NULL_STRING_2 +NULL_STRING_1 + "}");
                     count++;
                 }
             }

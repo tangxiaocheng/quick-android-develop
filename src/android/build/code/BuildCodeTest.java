@@ -71,7 +71,29 @@ public class BuildCodeTest {
                         true,
                         true,
                         targetActivityPackageName,
-                        "activity_cam_plus_pro_setup",
+                        "",
+                        appPackageName,
+                        xmlJson);
+        makeAndroidXml2Code.makeOnCreateCode();
+    }
+    @Test
+    public void generateCamPlusProSetUpForHmsLibrary() {
+        System.out.println("run... ");
+        System.out.println(Viewstant.PROJECT_FILE_PATH);
+
+        String xmlJson = "activity_cam_plus_pro_setup.json";
+
+        String androidAppPath = "/Users/randytang/WyzeAndroidCppTask/WyzePluginHmsAndroid";
+        String targetActivityPackageName = "com.wyze.cpp.randy.activity";
+        String appPackageName = "com.wyze.hms";
+
+        NewActivityByXml makeAndroidXml2Code =
+                new NewActivityByXml(
+                        androidAppPath,
+                        true,
+                        true,
+                        targetActivityPackageName,
+                        "",
                         appPackageName,
                         xmlJson);
         makeAndroidXml2Code.makeOnCreateCode();

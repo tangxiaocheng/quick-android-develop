@@ -55,7 +55,7 @@ public class NewActivityByXml {
         this.projectPath = projectPath;
         if (TextUtils.isEmpty(layoutFileName)) {
             System.err.println("XML_NAME==null return");
-            return;
+            layoutFileName = xmlJson.substring(0,xmlJson.length()-5);
         } else {
             // TODO
         }

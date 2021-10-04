@@ -40,8 +40,8 @@ public class NewActivityByXml {
     private String baseActivityName;
     private String projectPath;
     private XmlModel xmlModel;
-    private boolean isSetOnItemClick = true;
-    private boolean hasSwipeRefreshLayout;
+    private boolean isSetOnItemClick = false;
+    private boolean hasSwipeRefreshLayout = false;
 
     public NewActivityByXml(
             String projectPath,
@@ -340,6 +340,7 @@ public class NewActivityByXml {
 
 
         hasSwipeRefreshLayout = viewList.contains("SwipeRefreshLayout");
+        isSetOnItemClick = viewList.contains("RecyclerView")||viewList.contains("ListView");
         activitySystemOut.println();
         String firstClassLineString =
                 "public  class "

@@ -1,5 +1,6 @@
 package opt.xml.to.code;
 
+import java.beans.Introspector;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -23,6 +24,7 @@ public class NewActivityByXml {
     private static final String XML_SUFFIX = ".xml";
     private static final String VIEW_HOLDER_CLASS_NAME = "ViewHolder";
     private static final String CONVERT_VIEW = "convertView";
+    public static final String ON_WYZE_ITEM_CLICK_LISTENER = "OnWyzeItemClickListener";
     private boolean initMapSuccessful = true;
     private String classPath;
     private String xmlPath;
@@ -191,7 +193,7 @@ public class NewActivityByXml {
             activitySystemOut.println("import " + modelPackageName + "." + modelClassName + ";");
             isSetOnItemClick = viewList.contains("RecyclerView")||viewList.contains("ListView");
             if (isSetOnItemClick){
-                activitySystemOut.println("import " + modelPackageName + "." + "OnWyzeItemClickListener" + ";");
+                activitySystemOut.println("import " + modelPackageName + "." + ON_WYZE_ITEM_CLICK_LISTENER + ";");
             }
 
 
@@ -271,15 +273,15 @@ public class NewActivityByXml {
 
 
             if(isSetOnItemClick){
-                adapterSystemOut.println("import " + modelPackageName + "." + "OnWyzeItemClickListener" + ";");
+                adapterSystemOut.println("import " + modelPackageName + "." + ON_WYZE_ITEM_CLICK_LISTENER + ";");
             }
             if (isSetOnItemClick) {
                 Save2File wyzwClickInterface =
                         new Save2File(
-                                "OnWyzeItemClickListener", classPath + modelPackageName.replace(".", "/") + "/", "java");
+                                ON_WYZE_ITEM_CLICK_LISTENER, classPath + modelPackageName.replace(".", "/") + "/", "java");
                 wyzwClickInterface.println("package " + modelPackageName + ";");
                 wyzwClickInterface.println();
-                wyzwClickInterface.println("public interface OnWyzeItemClickListener<T>"  + "{");
+                wyzwClickInterface.println("public interface " + ON_WYZE_ITEM_CLICK_LISTENER + "<T>"  + "{");
                 wyzwClickInterface.println("");
                 wyzwClickInterface.println(NULL_STRING_1+ "void onItemClicked(T t, int position);");
                 wyzwClickInterface.println("");
@@ -297,20 +299,21 @@ public class NewActivityByXml {
             adapterSystemOut.println(NULL_STRING_2 + "private List" +
                     "<" + modelClassName + ">" +
                     "adapterList;");
-            adapterSystemOut.println(NULL_STRING_2 + "private OnWyzeItemClickListener" + "<" + modelClassName + ">" +
-                    " onItemClickListener;");
+            final String onItemClickListenerStr = Introspector.decapitalize(ON_WYZE_ITEM_CLICK_LISTENER);
+            adapterSystemOut.println(NULL_STRING_2 + "private " + ON_WYZE_ITEM_CLICK_LISTENER + "" + "<" + modelClassName + ">" +
+                    " " + onItemClickListenerStr + ";");
             adapterSystemOut.println();
 
             adapterSystemOut.println(
                     NULL_STRING_2
                             + "public "
                             + adapterClassName
-                            + "(OnWyzeItemClickListener" + "<" + modelClassName + ">" +
-                            " onItemClickListener,List<"
+                            + "(" + ON_WYZE_ITEM_CLICK_LISTENER + "" + "<" + modelClassName + ">" +
+                            " " + onItemClickListenerStr + ",List<"
                             + modelClassName
                             + "> adapterList"
                             + ") {");
-            adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "this.onItemClickListener = onItemClickListener;");
+            adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "this." + onItemClickListenerStr + " = "+onItemClickListenerStr+";");
             adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "this.adapterList = adapterList;");
 
             adapterSystemOut.println(NULL_STRING_2 + "}");
@@ -337,7 +340,7 @@ public class NewActivityByXml {
             adapterSystemOut.println(NULL_STRING_2 + "public void onBindViewHolder(@NonNull ViewHolder holder, int position) {");
           adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "final " + modelClassName + " itemModel = adapterList.get(position);");
           adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "holder.bindData(itemModel);");
-          adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClicked(itemModel, position));");
+          adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "holder.itemView.setOnClickListener(v -> " + onItemClickListenerStr + ".onItemClicked(itemModel, position));");
 
 
             adapterSystemOut.println(NULL_STRING_2 + "}");
@@ -357,7 +360,7 @@ public class NewActivityByXml {
                         + " extends  "
                         + baseActivityName
                         + (needSetOnClickListener ? " implements OnClickListener" : "")
-                        + (isSetOnItemClick ? ", OnWyzeItemClickListener<" +modelClassName+ ">" : "")
+                        + (isSetOnItemClick ? ", " + ON_WYZE_ITEM_CLICK_LISTENER + "<" +modelClassName+ ">" : "")
                         + (hasSwipeRefreshLayout ? ", SwipeRefreshLayout.OnRefreshListener" : "")
                         + " {";
         activitySystemOut.println(firstClassLineString);

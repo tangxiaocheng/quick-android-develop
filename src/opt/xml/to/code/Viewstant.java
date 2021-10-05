@@ -45,27 +45,27 @@ public class Viewstant {
         private static final long serialVersionUID = 949320914180190522L;
 
         {
-          put(VIEW, Import.IMPORT_ANDROID_VIEW + VIEW + ";");
-          put(BUTTON, Import.IMPORT_ANDROID_WIDGET + BUTTON + ";");
-          put(GRID_VIEW, Import.IMPORT_ANDROID_WIDGET + GRID_VIEW + ";");
-          put(IMAGE_VIEW, Import.IMPORT_ANDROID_WIDGET + IMAGE_VIEW + ";");
-          put(LINEAR_LAYOUT, Import.IMPORT_ANDROID_WIDGET + LINEAR_LAYOUT + ";");
-          put(RELATIVE_LAYOUT, Import.IMPORT_ANDROID_WIDGET + RELATIVE_LAYOUT + ";");
-          put(SCROLL_VIEW, Import.IMPORT_ANDROID_WIDGET + SCROLL_VIEW + ";");
-          put(TEXT_VIEW, Import.IMPORT_ANDROID_WIDGET + TEXT_VIEW + ";");
-          put(LIST_VIEW, Import.IMPORT_ANDROID_WIDGET + LIST_VIEW + ";");
-          put(EXPANDABLE_LIST_VIEW, Import.IMPORT_ANDROID_WIDGET + EXPANDABLE_LIST_VIEW + ";");
-          put(CHECK_BOX, Import.IMPORT_ANDROID_WIDGET + CHECK_BOX + ";");
-          put(EDIT_TEXT, Import.IMPORT_ANDROID_WIDGET + EDIT_TEXT + ";");
-          put(RADIO_GROUP, Import.IMPORT_ANDROID_WIDGET + RADIO_GROUP + ";");
-          put(RADIO_BUTTON, Import.IMPORT_ANDROID_WIDGET + RADIO_BUTTON + ";");
-          put(TOGGLE_BUTTON, Import.IMPORT_ANDROID_WIDGET + TOGGLE_BUTTON + ";");
+          put(VIEW, Import.IMPORT_ANDROID_VIEW + VIEW );
+          put(BUTTON, Import.IMPORT_ANDROID_WIDGET + BUTTON );
+          put(GRID_VIEW, Import.IMPORT_ANDROID_WIDGET + GRID_VIEW );
+          put(IMAGE_VIEW, Import.IMPORT_ANDROID_WIDGET + IMAGE_VIEW );
+          put(LINEAR_LAYOUT, Import.IMPORT_ANDROID_WIDGET + LINEAR_LAYOUT );
+          put(RELATIVE_LAYOUT, Import.IMPORT_ANDROID_WIDGET + RELATIVE_LAYOUT );
+          put(SCROLL_VIEW, Import.IMPORT_ANDROID_WIDGET + SCROLL_VIEW );
+          put(TEXT_VIEW, Import.IMPORT_ANDROID_WIDGET + TEXT_VIEW );
+          put(LIST_VIEW, Import.IMPORT_ANDROID_WIDGET + LIST_VIEW );
+          put(EXPANDABLE_LIST_VIEW, Import.IMPORT_ANDROID_WIDGET + EXPANDABLE_LIST_VIEW );
+          put(CHECK_BOX, Import.IMPORT_ANDROID_WIDGET + CHECK_BOX );
+          put(EDIT_TEXT, Import.IMPORT_ANDROID_WIDGET + EDIT_TEXT );
+          put(RADIO_GROUP, Import.IMPORT_ANDROID_WIDGET + RADIO_GROUP );
+          put(RADIO_BUTTON, Import.IMPORT_ANDROID_WIDGET + RADIO_BUTTON );
+          put(TOGGLE_BUTTON, Import.IMPORT_ANDROID_WIDGET + TOGGLE_BUTTON );
 
-          put(WEB_VIEW, Import.IMPORT_ANDROID_WEBKIT + WEB_VIEW + ";");
+          put(WEB_VIEW, Import.IMPORT_ANDROID_WEBKIT + WEB_VIEW );
 
-          put(RECYCLER_VIEW, Import.IMPORT_ANDROIDX_RECYCLER_VIEW_WIDGET + RECYCLER_VIEW + ";");
-          put(SWIPE_REFRESH_LAYOUT, Import.IMPORT_ANDROIDX_SWIPE_REFRESH_LAYOUT_WIDGET + SWIPE_REFRESH_LAYOUT + ";");
-          put(CONSTRAINT_LAYOUT, Import.IMPORT_ANDROIDX_CONSTRAINT_LAYOUT_WIDGET + CONSTRAINT_LAYOUT + ";");
+          put(RECYCLER_VIEW, Import.IMPORT_ANDROIDX_RECYCLER_VIEW_WIDGET + RECYCLER_VIEW );
+          put(SWIPE_REFRESH_LAYOUT, Import.IMPORT_ANDROIDX_SWIPE_REFRESH_LAYOUT_WIDGET + SWIPE_REFRESH_LAYOUT );
+          put(CONSTRAINT_LAYOUT, Import.IMPORT_ANDROIDX_CONSTRAINT_LAYOUT_WIDGET + CONSTRAINT_LAYOUT );
         }
       };
 
@@ -85,10 +85,8 @@ public class Viewstant {
   }
 
   public static String getViewByTt(String jianXie) {
-    for (Iterator<String> iterator = ANDROID_VIEW_MAP.keySet().iterator(); iterator.hasNext(); ) {
-      String type = iterator.next();
-      String tt = getLitterCase(type);
-      if (tt.equalsIgnoreCase(jianXie)) {
+    for (String type : ANDROID_VIEW_MAP.keySet()) {
+      if (getLitterCase(type).equalsIgnoreCase(jianXie)) {
         return type;
       }
     }

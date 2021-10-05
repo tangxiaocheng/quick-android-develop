@@ -27,7 +27,7 @@ public class BuildCodeTest {
                         targetActivityPackageName,
                         "activity_devices",
                         appPackageName,
-                        xmlJson);
+                        xmlJson, false);
         makeAndroidXml2Code.makeOnCreateCode();
     }
 
@@ -50,7 +50,7 @@ public class BuildCodeTest {
                         targetActivityPackageName,
                         "activity_events",
                         appPackageName,
-                        xmlJson);
+                        xmlJson, false);
         makeAndroidXml2Code.makeOnCreateCode();
     }
 
@@ -73,7 +73,7 @@ public class BuildCodeTest {
                         targetActivityPackageName,
                         "",
                         appPackageName,
-                        xmlJson);
+                        xmlJson, false);
         makeAndroidXml2Code.makeOnCreateCode();
     }
 
@@ -96,7 +96,7 @@ public class BuildCodeTest {
                         targetActivityPackageName,
                         "",
                         appPackageName,
-                        xmlJson);
+                        xmlJson, false);
         makeAndroidXml2Code.makeOnCreateCode();
     }
 
@@ -119,7 +119,7 @@ public class BuildCodeTest {
                         targetActivityPackageName,
                         "",
                         appPackageName,
-                        xmlJson);
+                        xmlJson, false);
         makeAndroidXml2Code.makeOnCreateCode();
     }
 }

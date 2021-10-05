@@ -26,7 +26,7 @@ public class BuildCode {
                         targetActivityPackageName,
                         "activity_devices",
                         appPackageName,
-                        xmlJson);
+                        xmlJson, false);
         makeAndroidXml2Code.makeOnCreateCode();
     }
 
@@ -48,7 +48,7 @@ public class BuildCode {
                         targetActivityPackageName,
                         "activity_events",
                         appPackageName,
-                        xmlJson);
+                        xmlJson, false);
         makeAndroidXml2Code.makeOnCreateCode();
     }
 }

@@ -25,7 +25,8 @@ public class NewActivityByXml {
     private static final String VIEW_HOLDER_CLASS_NAME = "ViewHolder";
     private static final String CONVERT_VIEW = "convertView";
     public static final String ON_WYZE_ITEM_CLICK_LISTENER = "OnWyzeItemClickListener";
-    public static final String END_SYNTAX = ";" ;
+    private  String fileSuffix = "java";
+    private  String END_SYNTAX = ";" ;
     private boolean initMapSuccessful = true;
     private String classPath;
     private String xmlPath;
@@ -53,8 +54,15 @@ public class NewActivityByXml {
             String classPackageName,
             String layoutFileName,
             String appPackageName,
-            String xmlJson) {
+            String xmlJson, boolean kotlin) {
         super();
+        if (kotlin) {
+            END_SYNTAX = "";
+            fileSuffix = "kt";
+        } else {
+            END_SYNTAX = ";";
+            fileSuffix = "java";
+        }
         this.projectPath = projectPath;
         if (TextUtils.isEmpty(layoutFileName)) {
             System.err.println("XML_NAME==null return");
@@ -75,7 +83,7 @@ public class NewActivityByXml {
         classPath = projectPath + "/src/main/java/";
 
         activitySystemOut =
-                new Save2File(activityName, classPath + classPackageName.replace(".", "/") + "/", "java");
+                new Save2File(activityName, classPath + classPackageName.replace(".", "/") + "/", fileSuffix);
         String xmlAbsolutePath = xmlPath + xmlName + ".xml";
 
         if (!TextUtils.isEmpty(xmlJson)) {
@@ -103,7 +111,7 @@ public class NewActivityByXml {
     public void makeOnCreateCode() {
 
         activitySystemOut =
-                new Save2File(activityName, classPath + classPackageName.replace(".", "/") + "/", "java");
+                new Save2File(activityName, classPath + classPackageName.replace(".", "/") + "/", fileSuffix);
 
         if (!initMapSuccessful) {
             System.out.println("initMapSuccessFull fail , please check");
@@ -241,7 +249,7 @@ public class NewActivityByXml {
                             modelClassName,
                             itemXmlName,
                             adapterPackageName,
-                            null);
+                            null, false);
 
             String listItemFindViewCode = adapterByXml.makeGetViewCode(xmlPath, itemXmlName, ".xml", modelClassName);
 
@@ -250,7 +258,7 @@ public class NewActivityByXml {
             // adapterSystemOut 需要更具xml文件生产adapter
             Save2File adapterSystemOut =
                     new Save2File(
-                            adapterClassName, classPath + adapterPackageName.replace(".", "/") + "/", "java");
+                            adapterClassName, classPath + adapterPackageName.replace(".", "/") + "/", fileSuffix);
 
             adapterSystemOut.println("package " + adapterPackageName + END_SYNTAX);
             adapterSystemOut.println();
@@ -279,7 +287,7 @@ public class NewActivityByXml {
             if (isSetOnItemClick) {
                 Save2File wyzwClickInterface =
                         new Save2File(
-                                ON_WYZE_ITEM_CLICK_LISTENER, classPath + modelPackageName.replace(".", "/") + "/", "java");
+                                ON_WYZE_ITEM_CLICK_LISTENER, classPath + modelPackageName.replace(".", "/") + "/", fileSuffix);
                 wyzwClickInterface.println("package " + modelPackageName + END_SYNTAX);
                 wyzwClickInterface.println();
                 wyzwClickInterface.println("public interface " + ON_WYZE_ITEM_CLICK_LISTENER + "<T>"  + "{");
@@ -492,7 +500,7 @@ public class NewActivityByXml {
     private void createModelClass(String modelClassName, String modelPackageName) {
         Save2File modelSystemOut =
                 new Save2File(
-                        modelClassName, classPath + modelPackageName.replace(".", "/") + "/", "java");
+                        modelClassName, classPath + modelPackageName.replace(".", "/") + "/", fileSuffix);
         modelSystemOut.println("package " + modelPackageName + END_SYNTAX);
         modelSystemOut.println();
         modelSystemOut.println("public class " + modelClassName + "{");

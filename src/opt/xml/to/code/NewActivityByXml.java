@@ -189,6 +189,11 @@ public class NewActivityByXml {
 
             activitySystemOut.println("import " + adapterPackageName + "." + adapterClassName + ";");
             activitySystemOut.println("import " + modelPackageName + "." + modelClassName + ";");
+            isSetOnItemClick = viewList.contains("RecyclerView")||viewList.contains("ListView");
+            if (isSetOnItemClick){
+                activitySystemOut.println("import " + modelPackageName + "." + "OnWyzeItemClickListener" + ";");
+            }
+
 
             // 判断xml文件是否存在，如已经存在，则不在生产 ListView item xml 文件
 
@@ -264,6 +269,10 @@ public class NewActivityByXml {
             adapterSystemOut.println("import " + appPackageName + ".R;");
             adapterSystemOut.println("import " + modelPackageName + "." + modelClassName + ";");
 
+
+            if(isSetOnItemClick){
+                adapterSystemOut.println("import " + modelPackageName + "." + "OnWyzeItemClickListener" + ";");
+            }
             if (isSetOnItemClick) {
                 Save2File wyzwClickInterface =
                         new Save2File(
@@ -340,7 +349,7 @@ public class NewActivityByXml {
 
 
         hasSwipeRefreshLayout = viewList.contains("SwipeRefreshLayout");
-        isSetOnItemClick = viewList.contains("RecyclerView")||viewList.contains("ListView");
+
         activitySystemOut.println();
         String firstClassLineString =
                 "public  class "
@@ -484,7 +493,7 @@ public class NewActivityByXml {
         modelSystemOut.println();
         modelSystemOut.println("public class " + modelClassName + "{");
         modelSystemOut.println();
-        modelSystemOut.println(NULL_STRING_1+"String strField1;");
+        modelSystemOut.println(NULL_STRING_1+"public String strField1;");
         modelSystemOut.println();
 
         modelSystemOut.println(NULL_STRING_1+"public " + modelClassName +

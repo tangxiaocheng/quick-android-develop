@@ -1,0 +1,24 @@
+{
+  "cl": {
+    "cl@top":{
+      "tv@back":"",
+      "tv@title":""
+    },
+    "iv@icon_fake": "",
+    "tv@headline": "",
+    "tv@description": "",
+    "ll#v": {
+      "b@next": ""
+    },
+    "b@exit":"",
+    "srl@wyze": {
+      "rv@events": {
+        "ll#v": {
+          "iv@eventVideoIcon": "",
+          "tv@time": "",
+          "b@gotoA": ""
+        }
+      }
+    }
+  }
+}

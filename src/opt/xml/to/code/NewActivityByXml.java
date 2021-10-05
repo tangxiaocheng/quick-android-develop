@@ -25,6 +25,7 @@ public class NewActivityByXml {
     private static final String VIEW_HOLDER_CLASS_NAME = "ViewHolder";
     private static final String CONVERT_VIEW = "convertView";
     public static final String ON_WYZE_ITEM_CLICK_LISTENER = "OnWyzeItemClickListener";
+    public static final String END_SYNTAX = ";" ;
     private boolean initMapSuccessful = true;
     private String classPath;
     private String xmlPath;
@@ -114,14 +115,14 @@ public class NewActivityByXml {
             System.err.println();
         }
 
-        activitySystemOut.println("package " + classPackageName + ";");
+        activitySystemOut.println("package " + classPackageName + END_SYNTAX);
         activitySystemOut.println();
 
         boolean needSetOnClickListener = false;
         for (String view : viewList) {
             needSetOnClickListener = isNeedSetOnClickListener(view);
             if (needSetOnClickListener) {
-                activitySystemOut.println("import android.view.View.OnClickListener;");
+                activitySystemOut.println("import android.view.View.OnClickListener" + END_SYNTAX);
                 if (!viewList.contains(Viewstant.VIEW)) {
                     viewList.add(Viewstant.VIEW);
                 }
@@ -132,22 +133,22 @@ public class NewActivityByXml {
         if (TextUtils.isEmpty(baseActivityName)
                 || baseActivityName.equals(Viewstant.ACTIVITY)) { // TODO 添加默认的 base activity （完整路径）
             baseActivityName = "AppCompatActivity";
-            activitySystemOut.println("import androidx.appcompat.app.AppCompatActivity;");
+            activitySystemOut.println("import androidx.appcompat.app.AppCompatActivity" + END_SYNTAX);
         } else {
             // TODO 导入baseActivity的包。需要设置
         }
 
         for (String string : viewList) {
             if (Viewstant.ANDROID_VIEW_MAP.containsKey(string)) {
-                activitySystemOut.println(Viewstant.ANDROID_VIEW_MAP.get(string));
+                activitySystemOut.println(Viewstant.ANDROID_VIEW_MAP.get(string)+END_SYNTAX);
             } else {
                 System.err.println("//请添加" + string);
             }
         }
         activitySystemOut.println();
 
-        activitySystemOut.println("import " + appPackageName + ".R;");
-        activitySystemOut.println("import android.os.Bundle;");
+        activitySystemOut.println("import " + appPackageName + ".R" + END_SYNTAX);
+        activitySystemOut.println("import android.os.Bundle" + END_SYNTAX);
 
         String listViewId = null;
 
@@ -173,12 +174,12 @@ public class NewActivityByXml {
         String itemXmlName = null;
         if (!TextUtils.isEmpty(listViewId)) {
 
-            activitySystemOut.println("import java.util.ArrayList;");
-            activitySystemOut.println("import java.util.List;");
-            activitySystemOut.println("import android.widget.ImageView;");
-            activitySystemOut.println("import android.widget.TextView;");
+            activitySystemOut.println("import java.util.ArrayList" + END_SYNTAX);
+            activitySystemOut.println("import java.util.List" + END_SYNTAX);
+            activitySystemOut.println("import android.widget.ImageView" + END_SYNTAX);
+            activitySystemOut.println("import android.widget.TextView" + END_SYNTAX);
 
-            activitySystemOut.println("import androidx.recyclerview.widget.GridLayoutManager;");
+            activitySystemOut.println("import androidx.recyclerview.widget.GridLayoutManager" + END_SYNTAX);
             adapterClassName = StringUtil.changeFirstToUpper(listViewId) + "Adapter";
             modelClassName = StringUtil.changeFirstToUpper(listViewId) + "Model";
             itemXmlName = StringUtil.getXmlName(listViewId) + "_item";
@@ -189,11 +190,11 @@ public class NewActivityByXml {
 
             System.err.println(adapterPackageName + "---" + modelPackageName);
 
-            activitySystemOut.println("import " + adapterPackageName + "." + adapterClassName + ";");
-            activitySystemOut.println("import " + modelPackageName + "." + modelClassName + ";");
+            activitySystemOut.println("import " + adapterPackageName + "." + adapterClassName + END_SYNTAX);
+            activitySystemOut.println("import " + modelPackageName + "." + modelClassName + END_SYNTAX);
             isSetOnItemClick = viewList.contains("RecyclerView")||viewList.contains("ListView");
             if (isSetOnItemClick){
-                activitySystemOut.println("import " + modelPackageName + "." + ON_WYZE_ITEM_CLICK_LISTENER + ";");
+                activitySystemOut.println("import " + modelPackageName + "." + ON_WYZE_ITEM_CLICK_LISTENER + END_SYNTAX);
             }
 
 
@@ -251,39 +252,39 @@ public class NewActivityByXml {
                     new Save2File(
                             adapterClassName, classPath + adapterPackageName.replace(".", "/") + "/", "java");
 
-            adapterSystemOut.println("package " + adapterPackageName + ";");
+            adapterSystemOut.println("package " + adapterPackageName + END_SYNTAX);
             adapterSystemOut.println();
-            adapterSystemOut.println("import java.util.List;");
+            adapterSystemOut.println("import java.util.List" + END_SYNTAX);
             adapterSystemOut.println();
-            adapterSystemOut.println("import android.content.Context;");
-            adapterSystemOut.println("import androidx.annotation.NonNull;");
-            adapterSystemOut.println("import android.view.LayoutInflater;");
-            adapterSystemOut.println("import android.view.View;");
-            adapterSystemOut.println("import android.view.ViewGroup;");
-            adapterSystemOut.println("import android.widget.AdapterView;");
-            adapterSystemOut.println("import androidx.recyclerview.widget.RecyclerView;");
-            adapterSystemOut.println("import android.widget.Button;");
+            adapterSystemOut.println("import android.content.Context" + END_SYNTAX);
+            adapterSystemOut.println("import androidx.annotation.NonNull" + END_SYNTAX);
+            adapterSystemOut.println("import android.view.LayoutInflater" + END_SYNTAX);
+            adapterSystemOut.println("import android.view.View" + END_SYNTAX);
+            adapterSystemOut.println("import android.view.ViewGroup" + END_SYNTAX);
+            adapterSystemOut.println("import android.widget.AdapterView" + END_SYNTAX);
+            adapterSystemOut.println("import androidx.recyclerview.widget.RecyclerView" + END_SYNTAX);
+            adapterSystemOut.println("import android.widget.Button" + END_SYNTAX);
 
             adapterSystemOut.println();
-            adapterSystemOut.println("import android.widget.ImageView;");
-            adapterSystemOut.println("import android.widget.CheckBox;");
-            adapterSystemOut.println("import android.widget.TextView;");
-            adapterSystemOut.println("import " + appPackageName + ".R;");
-            adapterSystemOut.println("import " + modelPackageName + "." + modelClassName + ";");
+            adapterSystemOut.println("import android.widget.ImageView" + END_SYNTAX);
+            adapterSystemOut.println("import android.widget.CheckBox" + END_SYNTAX);
+            adapterSystemOut.println("import android.widget.TextView" + END_SYNTAX);
+            adapterSystemOut.println("import " + appPackageName + ".R" + END_SYNTAX);
+            adapterSystemOut.println("import " + modelPackageName + "." + modelClassName + END_SYNTAX);
 
 
             if(isSetOnItemClick){
-                adapterSystemOut.println("import " + modelPackageName + "." + ON_WYZE_ITEM_CLICK_LISTENER + ";");
+                adapterSystemOut.println("import " + modelPackageName + "." + ON_WYZE_ITEM_CLICK_LISTENER + END_SYNTAX);
             }
             if (isSetOnItemClick) {
                 Save2File wyzwClickInterface =
                         new Save2File(
                                 ON_WYZE_ITEM_CLICK_LISTENER, classPath + modelPackageName.replace(".", "/") + "/", "java");
-                wyzwClickInterface.println("package " + modelPackageName + ";");
+                wyzwClickInterface.println("package " + modelPackageName + END_SYNTAX);
                 wyzwClickInterface.println();
                 wyzwClickInterface.println("public interface " + ON_WYZE_ITEM_CLICK_LISTENER + "<T>"  + "{");
                 wyzwClickInterface.println("");
-                wyzwClickInterface.println(NULL_STRING_1+ "void onItemClicked(T t, int position);");
+                wyzwClickInterface.println(NULL_STRING_1+ "void onItemClicked(T t, int position)" + END_SYNTAX);
                 wyzwClickInterface.println("");
 
                 wyzwClickInterface.println("}");
@@ -298,10 +299,10 @@ public class NewActivityByXml {
             adapterSystemOut.println();
             adapterSystemOut.println(NULL_STRING_2 + "private List" +
                     "<" + modelClassName + ">" +
-                    "adapterList;");
+                    "adapterList" + END_SYNTAX);
             final String onItemClickListenerStr = Introspector.decapitalize(ON_WYZE_ITEM_CLICK_LISTENER);
             adapterSystemOut.println(NULL_STRING_2 + "private " + ON_WYZE_ITEM_CLICK_LISTENER + "" + "<" + modelClassName + ">" +
-                    " " + onItemClickListenerStr + ";");
+                    " " + onItemClickListenerStr + END_SYNTAX);
             adapterSystemOut.println();
 
             adapterSystemOut.println(
@@ -313,15 +314,15 @@ public class NewActivityByXml {
                             + modelClassName
                             + "> adapterList"
                             + ") {");
-            adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "this." + onItemClickListenerStr + " = "+onItemClickListenerStr+";");
-            adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "this.adapterList = adapterList;");
+            adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "this." + onItemClickListenerStr + " = "+onItemClickListenerStr+ END_SYNTAX);
+            adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "this.adapterList = adapterList" + END_SYNTAX);
 
             adapterSystemOut.println(NULL_STRING_2 + "}");
             adapterSystemOut.println();
 
             adapterSystemOut.println(NULL_STRING_2 + "@Override");
             adapterSystemOut.println(NULL_STRING_2 + "public int getItemCount() {");
-            adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "return adapterList.size();");
+            adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "return adapterList.size()" + END_SYNTAX);
             adapterSystemOut.println(NULL_STRING_2 + "}");
 
 
@@ -329,8 +330,8 @@ public class NewActivityByXml {
             adapterSystemOut.println(NULL_STRING_2 + "@NonNull");
             adapterSystemOut.println(NULL_STRING_2 + "@Override");
             adapterSystemOut.println(NULL_STRING_2 + "public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {");
-            adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "View view = LayoutInflater.from(parent.getContext()).inflate(R.layout." + itemXmlName + ", parent, false);");
-            adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "return new ViewHolder(view);");
+            adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "View view = LayoutInflater.from(parent.getContext()).inflate(R.layout." + itemXmlName + ", parent, false)" + END_SYNTAX);
+            adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "return new ViewHolder(view)" + END_SYNTAX);
             adapterSystemOut.println(NULL_STRING_2 + "}");
             adapterSystemOut.println();
 
@@ -338,9 +339,9 @@ public class NewActivityByXml {
             adapterSystemOut.println();
             adapterSystemOut.println(NULL_STRING_2 + "@Override");
             adapterSystemOut.println(NULL_STRING_2 + "public void onBindViewHolder(@NonNull ViewHolder holder, int position) {");
-          adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "final " + modelClassName + " itemModel = adapterList.get(position);");
-          adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "holder.bindData(itemModel);");
-          adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "holder.itemView.setOnClickListener(v -> " + onItemClickListenerStr + ".onItemClicked(itemModel, position));");
+          adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "final " + modelClassName + " itemModel = adapterList.get(position)" + END_SYNTAX);
+          adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "holder.bindData(itemModel)" + END_SYNTAX);
+          adapterSystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "holder.itemView.setOnClickListener(v -> " + onItemClickListenerStr + ".onItemClicked(itemModel, position))" + END_SYNTAX);
 
 
             adapterSystemOut.println(NULL_STRING_2 + "}");
@@ -366,7 +367,7 @@ public class NewActivityByXml {
         activitySystemOut.println(firstClassLineString);
 
         for (String id : idViewMap.keySet()) {
-            activitySystemOut.println(NULL_STRING_1 + "private " + idViewMap.get(id) + " " + id + ";");
+            activitySystemOut.println(NULL_STRING_1 + "private " + idViewMap.get(id) + " " + id + END_SYNTAX);
         }
         activitySystemOut.println();
 
@@ -374,23 +375,23 @@ public class NewActivityByXml {
         activitySystemOut.println(
                 NULL_STRING_2 + "protected void onCreate(Bundle savedInstanceState) {");
         activitySystemOut.println(
-                NULL_STRING_2 + NULL_STRING_1 + "super.onCreate(savedInstanceState);");
+                NULL_STRING_2 + NULL_STRING_1 + "super.onCreate(savedInstanceState)" + END_SYNTAX);
         activitySystemOut.println(
-                NULL_STRING_2 + NULL_STRING_1 + "initView(R.layout." + xmlName + ");");
+                NULL_STRING_2 + NULL_STRING_1 + "initView(R.layout." + xmlName + ")" + END_SYNTAX);
 
         activitySystemOut.println(NULL_STRING_2 + "}");
 
         activitySystemOut.println();
         activitySystemOut.println(NULL_STRING_1 + "private void initView(" + "int layoutId" + "){");
         activitySystemOut.println();
-        activitySystemOut.println(NULL_STRING_1+NULL_STRING_1+"setContentView(layoutId);");
+        activitySystemOut.println(NULL_STRING_1+NULL_STRING_1+"setContentView(layoutId)" + END_SYNTAX);
         activitySystemOut.println();
 
         for (Iterator<String> iterator = idViewMap.keySet().iterator(); iterator.hasNext(); ) {
             String id = iterator.next();
             String string = idViewMap.get(id);
             activitySystemOut.println(
-                    NULL_STRING_2+NULL_STRING_1 + id + " = findViewById(R.id." + id + ");");
+                    NULL_STRING_2+NULL_STRING_1 + id + " = findViewById(R.id." + id + ")" + END_SYNTAX);
             if (Viewstant.LIST_VIEW.equals(string)
                     || Viewstant.GRID_VIEW.equals(string)
                     || Viewstant.RECYCLER_VIEW.equals(string)
@@ -398,11 +399,11 @@ public class NewActivityByXml {
                     || string.contains(Viewstant.RECYCLER_VIEW)
                     || string.contains(Viewstant.LIST_VIEW)) {
                 activitySystemOut.println();
-                activitySystemOut.println(NULL_STRING_2 +NULL_STRING_1+ "List<" + modelClassName + "> adapterList =new ArrayList<" + modelClassName + ">();");
+                activitySystemOut.println(NULL_STRING_2 +NULL_STRING_1+ "List<" + modelClassName + "> adapterList =new ArrayList<" + modelClassName + ">()" + END_SYNTAX);
 
                 activitySystemOut.println(NULL_STRING_2 +NULL_STRING_1+ "for (int i = 0; i < 30; i++) {");
                 activitySystemOut.println(NULL_STRING_2+NULL_STRING_1+NULL_STRING_1 + " adapterList.add(new " +modelClassName +
-                        "(\"ds\" + i));");
+                        "(\"ds\" + i))" + END_SYNTAX);
                 activitySystemOut.println(NULL_STRING_2+NULL_STRING_1 + "}");
 
                 activitySystemOut.println(
@@ -410,9 +411,9 @@ public class NewActivityByXml {
                                 + adapterClassName
                                 + " adapter = new "
                                 + adapterClassName
-                                + "(this,adapterList);");
-                activitySystemOut.println(NULL_STRING_2+NULL_STRING_1 + id + ".setAdapter(" + "adapter" + ");");
-                activitySystemOut.println(NULL_STRING_2+NULL_STRING_1 + id + ".setLayoutManager(new GridLayoutManager(this,1));");
+                                + "(this,adapterList)" + END_SYNTAX);
+                activitySystemOut.println(NULL_STRING_2+NULL_STRING_1 + id + ".setAdapter(" + "adapter" + ")" + END_SYNTAX);
+                activitySystemOut.println(NULL_STRING_2+NULL_STRING_1 + id + ".setLayoutManager(new GridLayoutManager(this,1))" + END_SYNTAX);
 
 
             }
@@ -423,7 +424,7 @@ public class NewActivityByXml {
             for (String key : idViewMap.keySet()) {
                 String string = idViewMap.get(key);
                 if (isNeedSetOnClickListener(string)) {
-                    activitySystemOut.println(NULL_STRING_2+NULL_STRING_1 + key + ".setOnClickListener(this);");
+                    activitySystemOut.println(NULL_STRING_2+NULL_STRING_1 + key + ".setOnClickListener(this)" + END_SYNTAX);
                     listenerList.add(key);
                 }
             }
@@ -438,7 +439,7 @@ public class NewActivityByXml {
                                     + ".setText("
                                     + Viewstant.SHUANG_YIN_HAO
                                     + Viewstant.SHUANG_YIN_HAO
-                                    + ");");
+                                    + ")" + END_SYNTAX);
                 }
             }
         }
@@ -450,7 +451,7 @@ public class NewActivityByXml {
             activitySystemOut.println(NULL_STRING_1 + "@Override");
             activitySystemOut.println(NULL_STRING_1 + "public void onClick(View v) {");
             if (isMakeOnClickListenerForActivity) {
-                activitySystemOut.println(NULL_STRING_2+NULL_STRING_1 + "int id = v.getId();");
+                activitySystemOut.println(NULL_STRING_2+NULL_STRING_1 + "int id = v.getId()" + END_SYNTAX);
                 int count = 0;
                 for (String string : listenerList) {
                     activitySystemOut.println(NULL_STRING_2 +NULL_STRING_1+ (count==0?"":"else ")+"if(id == R.id." +string+
@@ -492,16 +493,16 @@ public class NewActivityByXml {
         Save2File modelSystemOut =
                 new Save2File(
                         modelClassName, classPath + modelPackageName.replace(".", "/") + "/", "java");
-        modelSystemOut.println("package " + modelPackageName + ";");
+        modelSystemOut.println("package " + modelPackageName + END_SYNTAX);
         modelSystemOut.println();
         modelSystemOut.println("public class " + modelClassName + "{");
         modelSystemOut.println();
-        modelSystemOut.println(NULL_STRING_1+"public String strField1;");
+        modelSystemOut.println(NULL_STRING_1+"public String strField1" + END_SYNTAX);
         modelSystemOut.println();
 
         modelSystemOut.println(NULL_STRING_1+"public " + modelClassName +
                 "(String strField1) {");
-        modelSystemOut.println(NULL_STRING_1 + NULL_STRING_2+"this.strField1 = strField1;");
+        modelSystemOut.println(NULL_STRING_1 + NULL_STRING_2+"this.strField1 = strField1" + END_SYNTAX);
         modelSystemOut.println(NULL_STRING_1+"}");
         modelSystemOut.println();
 
@@ -570,12 +571,12 @@ public class NewActivityByXml {
                 NULL_STRING_2  + "final static class " + VIEW_HOLDER_CLASS_NAME + " extends RecyclerView.ViewHolder { ");
         activitySystemOut.println();
         for (String id : idViewMap.keySet()) {
-            activitySystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "private final " + idViewMap.get(id) + " " + id + ";");
+            activitySystemOut.println(NULL_STRING_2 + NULL_STRING_1 + "private final " + idViewMap.get(id) + " " + id + END_SYNTAX);
         }
 
         activitySystemOut.println();
         activitySystemOut.println(NULL_STRING_2 +NULL_STRING_1+ "public ViewHolder(@NonNull View itemView) {");
-        activitySystemOut.println(NULL_STRING_2 +NULL_STRING_1+NULL_STRING_1+ "super(itemView);");
+        activitySystemOut.println(NULL_STRING_2 +NULL_STRING_1+NULL_STRING_1+ "super(itemView)" + END_SYNTAX);
 
         final String firstString = new String(new char[]{VIEW_HOLDER_CLASS_NAME.charAt(0)});
         final String classObject =
@@ -592,7 +593,7 @@ public class NewActivityByXml {
                             + "."
                             + "findViewById(R.id."
                             + id
-                            + ");");
+                            + ")" + END_SYNTAX);
         }
         activitySystemOut.println(NULL_STRING_2+NULL_STRING_1 + "}");
 
@@ -601,7 +602,7 @@ public class NewActivityByXml {
                 " itemModel) {");
 
         activitySystemOut.println();
-        activitySystemOut.println(NULL_STRING_2 +NULL_STRING_1+ NULL_STRING_2+"timeTv.setText(itemModel.strField1"+");");
+        activitySystemOut.println(NULL_STRING_2 +NULL_STRING_1+ NULL_STRING_2+"timeTv.setText(itemModel.strField1"+")" + END_SYNTAX);
 
         activitySystemOut.println();
         activitySystemOut.println(NULL_STRING_2 +NULL_STRING_1 + "}");

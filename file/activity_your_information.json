@@ -1,0 +1,14 @@
+{
+  "cl": {
+    "ll@center#v": {
+      "tv@yourName": "",
+      "tv@yourNameDescription": "",
+      "et@firstName": "",
+      "et@lastName": ""
+    },
+    "ll@bottom#v": {
+      "v": "",
+      "b@next": ""
+    }
+  }
+}

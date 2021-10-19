@@ -2,6 +2,8 @@ package opt.xml.to.code;
 
 import opt.xml.util.TextUtils;
 import java.util.Iterator;
+import java.util.Objects;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import tangxiaocheng.log.StringUtil;
@@ -166,9 +168,9 @@ public class XmlModel {
         boolean isFatherLayout = optJson instanceof JSONObject;
 
         String target = "</" + factViewType + ">";
-        if (factViewType.equals("SwipeRefreshLayout")) {
+        if (Objects.equals(factViewType, "SwipeRefreshLayout")) {
           target = "</" + "androidx.swiperefreshlayout.widget.SwipeRefreshLayout" + ">";
-        } else if(factViewType.equals("ConstraintLayout")){
+        } else if(Objects.equals(factViewType, "ConstraintLayout")){
           target = "</" + "androidx.constraintlayout.widget.ConstraintLayout" + ">";
         }
 

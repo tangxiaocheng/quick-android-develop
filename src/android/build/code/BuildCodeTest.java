@@ -82,10 +82,10 @@ public class BuildCodeTest {
         System.out.println("run... ");
         System.out.println(Viewstant.PROJECT_FILE_PATH);
 
-        String xmlJson = "activity_cam_plus_pro_setup.json";
+        String xmlJson = "activity_cam_plus_phone.json";
 
         String androidAppPath = "/Users/randytang/WyzeAndroidCppTask/WyzePluginHmsAndroid";
-        String targetActivityPackageName = "com.wyze.cpp.randy.activity";
+        String targetActivityPackageName = "com.wyze.cpp.abt.activity";
         String appPackageName = "com.wyze.hms";
 
         NewActivityByXml makeAndroidXml2Code =
@@ -105,11 +105,15 @@ public class BuildCodeTest {
         System.out.println("run... ");
         System.out.println(Viewstant.PROJECT_FILE_PATH);
 
-        String xmlJson = "activity_event_demo.json";
+        String xmlJson = "activity_your_information.json";
 
-        String androidAppPath = "/Users/randytang/WyzeAndroidCppTask/WyzePluginEventAndroid";
-        String targetActivityPackageName = "com.wyze.cpp.randy.event.activity";
-        String appPackageName = "com.wyze.event";
+
+//        cpp_title_bar_all.xml
+
+
+        String androidAppPath = "/Users/randytang/WyzeAndroidCppTask/WyzePluginHmsAndroid";
+        String targetActivityPackageName = "com.wyze.cpp.setup";
+        String appPackageName = "com.wyze.hms";
 
         NewActivityByXml makeAndroidXml2Code =
                 new NewActivityByXml(

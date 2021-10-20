@@ -342,4 +342,29 @@ public class BuildCodeTest {
                         xmlJson, false);
         makeAndroidXml2Code.makeOnCreateCode();
     }
+
+
+    //activity_cpp_security_cameras.xml.xml
+    @Test
+    public void generate_activity_cpp_security_cameras() {
+
+        System.out.println("run... ");
+        System.out.println(Viewstant.PROJECT_FILE_PATH);
+
+        String xmlJson = "";
+        String androidAppPath = "/Users/randytang/WyzeAndroidCppTask/WyzePluginHmsAndroid";
+        String targetActivityPackageName = "com.wyze.cpp.setup";
+        String appPackageName = "com.wyze.hms";
+
+        NewActivityByXml makeAndroidXml2Code =
+                new NewActivityByXml(
+                        androidAppPath,
+                        true,
+                        true,
+                        targetActivityPackageName,
+                        "activity_cpp_security_cameras",
+                        appPackageName,
+                        xmlJson, false);
+        makeAndroidXml2Code.makeOnCreateCode();
+    }
 }
